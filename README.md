@@ -4,7 +4,7 @@
 
 ### Instructions to create L1Ntuples
 
-#####1. Set up the emulator
+**1. Set up the emulator**
 
 ```
 cmsrel CMSSW_12_3_0_pre1
@@ -27,7 +27,7 @@ L1T emulation relevant GlobalTags in CMSSW_12_3_0 are:
 * for run2 mc '123X_mcRun2_asymptotic_v1'
 * for run3 mc '123X_mcRun3_2021_realistic_v1'
 
-#####2. Add the 2018 PbPb menu to the emulator
+**2. Add the 2018 PbPb menu to the emulator**
 
 ```
 git cms-addpkg L1Trigger/L1TCommon
@@ -39,7 +39,7 @@ cd ../../../../../
 scram b -j 8
 ```
 
-#####3. **Run cmsDriver.py script**
+**3. Run cmsDriver.py script**
 
 Create a script to hold the cmsDriver.py command:
 
@@ -80,7 +80,7 @@ Create the cmsRun config:
 ./runCmsDriver.py
 ```
 
-##### 4. Do a local test of cmsRun
+**4. Do a local test of cmsRun**
 
 ```
 cmsRun L1Ntuple_data2018.py
