@@ -1,0 +1,7 @@
+*.pdf
+*.txt
+*.DS_Store
+*.root
+*.xml
+bin/**
+build/**
