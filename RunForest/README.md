@@ -1,4 +1,4 @@
-## Instructions to run the baseline Run 3 HI menu + forest offline information with CMSSW_12_3_0_pre1
+## Instructions to run the L1Emulator + HIForest with the baseline Run 3 HI menu using CMSSW_12_3_0_pre1
 
 These instructions are for running the L1Ntuples with the offline information included.
 

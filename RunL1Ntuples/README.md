@@ -1,8 +1,8 @@
-## Instructions to run the baseline Run 3 HI menu + forest offline information with CMSSW_12_3_0_pre1
+## Instructions to run the L1Emulator with the baseline Run 3 HI menu using CMSSW_12_3_0_pre1
 
-These instructions are for running the L1Ntuples with the offline information included.
+These instructions are for creating only the L1Ntuples without the offline information included.
 
-### 1. Set up the emulator and the HIForest code
+### 1. Set up the emulator
 
 ```
 cmsrel CMSSW_12_3_0_pre1
@@ -13,7 +13,6 @@ git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
 git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0
 git cms-merge-topic -u cms-l1t-offline:l1t-integration-v114.0-CMSSW_12_3_0
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
-git cms-merge-topic -u mandrenguyen:l1forest_1230pre1
 
 git cms-checkdeps -A -a
 
