@@ -1,8 +1,8 @@
-### Instructions to run the baseline Run 3 HI menu + forest offline information with CMSSW_12_3_0_pre1
+##Instructions to run the baseline Run 3 HI menu + forest offline information with CMSSW_12_3_0_pre1
 
 These instructions are for running the L1Ntuples with the offline information included.
 
-####1. Set up the emulator and the HIForest code
+###1. Set up the emulator and the HIForest code
 
 ```
 cmsrel CMSSW_12_3_0_pre1
@@ -20,7 +20,7 @@ git cms-checkdeps -A -a
 scram b -j 8
 ```
 
-####2. Add the baseline Run 3 HI menu to the emulator
+###2. Add the baseline Run 3 HI menu to the emulator
 
 ```
 git cms-addpkg L1Trigger/L1TCommon
@@ -34,7 +34,7 @@ scram b -j 8
 
 Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_0.xml')
 
-####4. Do a local test of cmsRun
+###3. Do a local test of cmsRun
 
 ```
 cp L1StudiesFramework/RunForest/forestL1_miniAOD_2018Data.py CMSSW_12_3_0_pre1/src
@@ -50,7 +50,7 @@ cd CMSSW_12_3_0_pre1/src
 cmsRun forestL1_miniAOD_Run3MC.py
 ```
 
-#### 5. Submit CRAB jobs
+###4. Submit CRAB jobs
 
 Edit crabConfig_2018Data_ForestL1.py or crabConfig_Run3MC_ForestL1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 

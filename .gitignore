@@ -3,5 +3,4 @@
 *.DS_Store
 *.root
 *.xml
-bin/**
-build/**
+RunDataReco/**
