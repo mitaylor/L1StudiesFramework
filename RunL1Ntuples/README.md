@@ -37,9 +37,9 @@ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L
 
 For the following instructions please alter the paths to reflect your own setup.
 
-**For processing Run 2 data:**
+Edit runCmsDriver_2018Data.sh or runCmsDriver_Run3MC to change the test data file or output config file name.
 
-Edit runCmsDriver_2018Data.sh to change the test data file or output config file name.
+**For processing Run 2 data:**
 
 ```
 cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_12_3_0_pre1/src
