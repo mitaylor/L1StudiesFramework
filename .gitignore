@@ -4,3 +4,4 @@
 *.root
 *.xml
 RunDataReco/**
+ReadL1Ntuples/bin/**
