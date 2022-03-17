@@ -14,6 +14,7 @@ git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0
 git cms-merge-topic -u cms-l1t-offline:l1t-integration-v114.0-CMSSW_12_3_0
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 git cms-merge-topic -u mandrenguyen:l1forest_1230pre1
+svn export https://github.com/boundino/HltL1Run2021.git/trunk/L1/ADC
 
 git cms-checkdeps -A -a
 
