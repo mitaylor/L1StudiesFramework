@@ -140,8 +140,8 @@ SSHIRun2018A = "HeavyIonsAnalysis/EGMAnalysis/data/SSHIRun2018A.dat"
 process.load('HeavyIonsAnalysis.EGMAnalysis.correctedElectronProducer_cfi')
 process.correctedElectrons.correctionFile = SSHIRun2018A
 
-#process.load('HeavyIonsAnalysis.MuonAnalysis.unpackedMuons_cfi')
-#process.load("HeavyIonsAnalysis.MuonAnalysis.muonAnalyzer_cfi")
+process.load('HeavyIonsAnalysis.MuonAnalysis.unpackedMuons_cfi')
+process.load("HeavyIonsAnalysis.MuonAnalysis.muonAnalyzer_cfi")
 process.load('HeavyIonsAnalysis.EGMAnalysis.ggHiNtuplizer_cfi')
 process.ggHiNtuplizer.doMuons = cms.bool(False)
 process.ggHiNtuplizer.electronSrc = "correctedElectrons"
@@ -180,9 +180,9 @@ process.forest = cms.Path(
     process.ggHiNtuplizer +
     process.zdcdigi +
     process.QWzdcreco +
-    process.zdcanalyzer #+
-    # process.unpackedMuons +
-    # process.muonAnalyzer
+    process.zdcanalyzer +
+    process.unpackedMuons +
+    process.muonAnalyzer
     )
 
 #customisation
@@ -265,10 +265,10 @@ from Configuration.Applications.ConfigBuilder import MassReplaceInputTag
 # customisation of the process.
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW 
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP 
 
 #call to customisation function L1TReEmulFromRAW imported from L1Trigger.Configuration.customiseReEmul
-process = L1TReEmulFromRAW(process)
+process = L1TReEmulFromRAWsimHcalTP(process)
 
 # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple
 from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU 
@@ -308,5 +308,7 @@ process.schedule.append(process.HFAdc)
 
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
+#process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(15, 19) # set the MB thresholds; (15, 19) is the default
+
 process.es_prefer_caloparams = cms.ESPrefer("PoolDBESSource","l1conddb")
 MassReplaceInputTag(process, new="rawDataMapperByLabel", old="rawDataCollector")

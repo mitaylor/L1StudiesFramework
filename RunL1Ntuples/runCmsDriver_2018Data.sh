@@ -7,7 +7,7 @@ config=L1Ntuple_Data2018; # cmsRun config file name
 
 cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --repacked --python_filename=${config}.py \
     -n 1000 --no_output --era=${era} --data --conditions=${globaltag} \
-    --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW \
+    --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimHcalTP \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
     --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParams_2018_v1_4_1 \
     --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML \
@@ -16,6 +16,8 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --repacked --python_filename=${confi
 echo '
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
+#process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(15, 19) # set the MB thresholds; (15, 19) is the default
+
 process.es_prefer_caloparams = cms.ESPrefer("PoolDBESSource","l1conddb")
 MassReplaceInputTag(process, new="rawDataMapperByLabel", old="rawDataCollector")
 

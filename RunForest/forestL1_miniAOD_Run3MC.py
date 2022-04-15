@@ -252,10 +252,10 @@ associatePatAlgosToolsTask(process)
 # customisation of the process.
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAW 
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP 
 
 #call to customisation function L1TReEmulMCFromRAW imported from L1Trigger.Configuration.customiseReEmul
-process = L1TReEmulMCFromRAW(process)
+process = L1TReEmulMCFromRAWSimHcalTP(process)
 
 # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple
 from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU 
@@ -295,4 +295,6 @@ process.schedule.append(process.HFAdc)
 
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
+#process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(15, 19) # set the MB thresholds; (15, 19) is the default
+
 process.es_prefer_caloparams = cms.ESPrefer("PoolDBESSource","l1conddb")
