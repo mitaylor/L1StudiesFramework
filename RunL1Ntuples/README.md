@@ -1,4 +1,4 @@
-## Instructions to run the L1Emulator with the baseline Run 3 HI menu using CMSSW_12_3_0_pre1
+## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_12_3_0_pre1
 
 These instructions are for creating only the L1Ntuples without the offline information included.
 
@@ -20,19 +20,19 @@ git cms-checkdeps -A -a
 scram b -j 8
 ```
 
-### 2. Add the baseline Run 3 HI menu to the emulator
+### 2. Add the Run 3 HI menu to the emulator
 
 ```
 git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/L1Menu_CollisionsHeavyIons2022_v0_0_0.xml
+wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2022_v0_0_3.xml
 cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_0.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_3.xml')
 
 ### 3. Run cmsDriver.py script
 
