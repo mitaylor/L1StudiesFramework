@@ -14,7 +14,6 @@ git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0_pre6
 git cms-merge-topic -u cms-l1t-offline:l1t-integration-v127.0
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 git cms-merge-topic -u kakwok:CLCT_thresholds
-svn export https://github.com/boundino/HltL1Run2021.git/trunk/L1/ADC
 
 git cms-checkdeps -A -a
 
@@ -86,5 +85,3 @@ cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_12_3_0_pre1/src
 cd CMSSW_12_3_0_pre1/src
 crab submit crabConfig_Run3MC_L1.py
 ```
-
-w
