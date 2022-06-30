@@ -18,16 +18,22 @@ process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 123X, mc")
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
         fileNames = cms.untracked.vstring(
-            '/store/user/mnguyen//Run3MC/QCDPhoton_pThat15_Run3_HydjetEmbedded/QCDPhoton_pThat15_Run3_HydjetEmbedded_mAOD/220217_171946/0000/step3_RAW2DIGI_L1Reco_RECO_EI_PAT_PU_113.root'
+            '/store/himc/Run3Winter22PbPbNoMixRECOMiniAOD/MinBias_Hydjet_Drum5F_5p02TeV/MINIAODSIM/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/b8e9763d-a38e-4cdf-bcfa-575c3e054f1f.root'
         ),
         secondaryFileNames = cms.untracked.vstring(
-            '/store/user/mnguyen/Run3MC/QCDPhoton_pThat15_Run3_HydjetEmbedded/QCDPhoton_pThat15_Run3_HydjetEmbedded_DIGI/211126_120712/0000/step2_DIGI_L1_DIGI2RAW_HLT_PU_20.root'
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/0084147f-227f-4698-be9f-fa9d58036906.root',
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/1b3ae443-ff70-45e3-872e-ad66407ec708.root',
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/1e2d5a09-3e5d-421f-ae1e-9833d05e420a.root',
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/4fd8ee15-30d0-44af-b938-6e745eda1617.root',
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/66fa8b9b-67d7-4a2a-b56b-08f02c76ee73.root',
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/7df0c27e-c4a1-4358-ab3d-b4a31646cc83.root',
+            '/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/b634ddf4-02e7-4e4e-8c86-9488023edb7f.root'
             )
     )
 
 # number of events to process, set to -1 to process all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(2000)
     )
 
 ###############################################################################
@@ -52,6 +58,7 @@ process.options = cms.untracked.PSet(
     IgnoreCompletely = cms.untracked.vstring(),
     Rethrow = cms.untracked.vstring(),
     SkipEvent = cms.untracked.vstring(),
+    accelerators = cms.untracked.vstring('*'),
     allowUnscheduled = cms.obsolete.untracked.bool,
     canDeleteEarly = cms.untracked.vstring(),
     deleteNonConsumedUnscheduledModules = cms.untracked.bool(True),
@@ -285,16 +292,6 @@ from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEar
 process = customiseEarlyDelete(process)
 # End adding early deletion
 
-process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
-    digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
-)
-
-process.HFAdc = cms.Path(process.HFAdcana)
-process.schedule.append(process.HFAdc)
-
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
 process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 16)
-
-process.es_prefer_caloparams = cms.ESPrefer("PoolDBESSource","l1conddb")

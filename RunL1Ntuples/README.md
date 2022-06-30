@@ -1,18 +1,19 @@
-## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_12_3_0_pre1
+## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_12_3_0_pre6
 
 These instructions are for creating only the L1Ntuples without the offline information included.
 
 ### 1. Set up the emulator
 
 ```
-cmsrel CMSSW_12_3_0_pre1
-cd CMSSW_12_3_0_pre1/src
+cmsrel CMSSW_12_3_0_pre6
+cd CMSSW_12_3_0_pre6/src
 cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v114.0-CMSSW_12_3_0
+git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0_pre6
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v127.0
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
+git cms-merge-topic -u kakwok:CLCT_thresholds
 svn export https://github.com/boundino/HltL1Run2021.git/trunk/L1/ADC
 
 git cms-checkdeps -A -a
@@ -32,7 +33,7 @@ cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_3.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_0_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_3.xml')
 
 ### 3. Run cmsDriver.py script
 
@@ -86,3 +87,4 @@ cd CMSSW_12_3_0_pre1/src
 crab submit crabConfig_Run3MC_L1.py
 ```
 
+w

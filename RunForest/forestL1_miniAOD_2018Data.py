@@ -51,6 +51,7 @@ process.options = cms.untracked.PSet(
     IgnoreCompletely = cms.untracked.vstring(),
     Rethrow = cms.untracked.vstring(),
     SkipEvent = cms.untracked.vstring(),
+    accelerators = cms.untracked.vstring('*'),
     allowUnscheduled = cms.obsolete.untracked.bool,
     canDeleteEarly = cms.untracked.vstring(),
     deleteNonConsumedUnscheduledModules = cms.untracked.bool(True),
@@ -298,17 +299,8 @@ from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEar
 process = customiseEarlyDelete(process)
 # End adding early deletion
 
-process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
-    digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
-)
-
-process.HFAdc = cms.Path(process.HFAdcana)
-process.schedule.append(process.HFAdc)
-
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
 process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 16)
 
-process.es_prefer_caloparams = cms.ESPrefer("PoolDBESSource","l1conddb")
 MassReplaceInputTag(process, new="rawDataMapperByLabel", old="rawDataCollector")
