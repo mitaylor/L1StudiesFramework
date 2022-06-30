@@ -1,15 +1,15 @@
 ### Summary
 
-This is an example for how to read the emulated trigger decisions from L1Ntuples created with the 2018 PbPb menu (L1Menu_CollisionsHeavyIons2018_v4_2_0.xml) or the updated baseline Run 3 menu (L1Menu_CollisionsHeavyIons2022_v0_0_0.xml). If you need a test file please contact me.
+This is an example for how to read the emulated trigger decisions from L1Ntuples created with a Heavy Ion menu. Versions between L1Menu_CollisionsHeavyIons2018_v4_2_0.xml and L1Menu_CollisionsHeavyIons2022_v0_0_3 are supported. If you need a test file please contact me.
 
-If you are using a custom menu, you can edit the menu map in src/PrintDecisions.C by using the script data/makeMenuMap.sh to process your custom menu. Please contact me if you need help.
+If you are using a custom menu, you can add a menu map to include/Menu.h by using the script data/makeMenuMap.sh to process your custom menu. Please contact me if you need help.
 
 ### Running instructions
 
-1. Run cmsenv in CMSSW_12_3_0_pre1
+1. Run cmsenv in CMSSW_12_3_0
 
    ```
-   cd ~/L1StudiesFramework/CMSSW_12_3_0_pre1/src
+   cd ~/L1StudiesFramework/CMSSW_12_3_0/src
    cmsenv
    ```
 
