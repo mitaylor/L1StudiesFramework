@@ -12,10 +12,11 @@ private:
    static const map<int, string> Menu_Y2022_V0_0_1;
    static const map<int, string> Menu_Y2022_V0_0_2;
    static const map<int, string> Menu_Y2022_V0_0_3;
+   static const map<int, string> Menu_Y2022_V0_0_4;
    
    map<int, string> SelectedMenu;
 public:
-   enum Version { Y2018_V4_2_0, Y2022_V0_0_0, Y2022_V0_0_1, Y2022_V0_0_2, Y2022_V0_0_3 };
+   enum Version { Y2018_V4_2_0, Y2022_V0_0_0, Y2022_V0_0_1, Y2022_V0_0_2, Y2022_V0_0_3, Y2022_V0_0_4 };
    
    Menu(Version version) {
       switch (version) {
@@ -33,6 +34,9 @@ public:
             break;
          case Y2022_V0_0_3:
             SelectedMenu.insert(Menu_Y2022_V0_0_3.begin(), Menu_Y2022_V0_0_3.end());
+            break;
+         case Y2022_V0_0_4:
+            SelectedMenu.insert(Menu_Y2022_V0_0_4.begin(), Menu_Y2022_V0_0_4.end());
             break;
       }
    }
@@ -1565,4 +1569,122 @@ const map<int, string> Menu::Menu_Y2022_V0_0_3 = {
    {240, "L1_DoubleMuSQ_MaxDr3p5M0to7_BptxAND"},
    {242, "L1_DoubleMu0_MaxDr3p5_BptxAND"},
    {243, "L1_DoubleMuSQ_MaxDr3p5_BptxAND"}
+};
+
+const map<int, string> Menu::Menu_Y2022_V0_0_4 = {
+   {27, "L1_DoubleMuOpen_NotMinimumBiasHF2_AND_BptxAND"},
+   {30, "L1_DoubleMuSQ_BptxAND"},
+   {107, "L1_ZeroBias"},
+   {154, "L1_MinimumBiasHF1_AND_BptxAND"},
+   {155, "L1_MinimumBiasHF1_OR_BptxAND"},
+   {164, "L1_MinimumBiasHF2_AND_BptxAND"},
+   {165, "L1_MinimumBiasHF2_OR_BptxAND"},
+   {180, "L1_SingleMuOpen_BptxAND"},
+   {181, "L1_SingleMu0_BptxAND"},
+   {182, "L1_SingleMu3_BptxAND"},
+   {183, "L1_SingleMu5_BptxAND"},
+   {184, "L1_SingleMu7_BptxAND"},
+   {202, "L1_SingleMuOpen_NotMinimumBiasHF2_AND_BptxAND"},
+   {208, "L1_SingleMuOpen_SingleJet28_MidEta2p7_BptxAND"},
+   {209, "L1_SingleMuOpen_SingleJet44_MidEta2p7_BptxAND"},
+   {210, "L1_SingleMuOpen_SingleJet56_MidEta2p7_BptxAND"},
+   {211, "L1_SingleMuOpen_SingleJet64_MidEta2p7_BptxAND"},
+   {212, "L1_SingleMu3_SingleJet28_MidEta2p7_BptxAND"},
+   {213, "L1_SingleMu3_SingleJet32_MidEta2p7_BptxAND"},
+   {214, "L1_SingleMu3_SingleJet40_MidEta2p7_BptxAND"},
+   {216, "L1_SingleMu3_SingleEG12_BptxAND"},
+   {217, "L1_SingleMuOpen_SingleEG15_BptxAND"},
+   {218, "L1_SingleMu3_SingleEG20_BptxAND"},
+   {219, "L1_SingleMu3_SingleEG30_BptxAND"},
+   {220, "L1_SingleMu5_SingleEG10_BptxAND"},
+   {221, "L1_SingleMu5_SingleEG12_BptxAND"},
+   {222, "L1_SingleMu5_SingleEG15_BptxAND"},
+   {223, "L1_SingleMu5_SingleEG20_BptxAND"},
+   {224, "L1_SingleMu7_SingleEG7_BptxAND"},
+   {225, "L1_SingleMu7_SingleEG10_BptxAND"},
+   {226, "L1_SingleMu7_SingleEG12_BptxAND"},
+   {227, "L1_SingleMu7_SingleEG15_BptxAND"},
+   {228, "L1_SingleMu12_SingleEG7_BptxAND"},
+   {232, "L1_DoubleMuOpen_BptxAND"},
+   {233, "L1_DoubleMuOpen_OS_BptxAND"},
+   {234, "L1_DoubleMuOpen_SS_BptxAND"},
+   {235, "L1_DoubleMu0_BptxAND"},
+   {236, "L1_DoubleMu10_BptxAND"},
+   {241, "L1_DoubleMuOpen_MaxDr3p5_BptxAND"},
+   {246, "L1_DoubleMu0_NotMinimumBiasHF2_AND_BptxAND"},
+   {259, "L1_SingleJet8_BptxAND"},
+   {260, "L1_SingleJet16_BptxAND"},
+   {261, "L1_SingleJet24_BptxAND"},
+   {262, "L1_SingleJet28_BptxAND"},
+   {263, "L1_SingleJet32_BptxAND"},
+   {264, "L1_SingleJet36_BptxAND"},
+   {265, "L1_SingleJet40_BptxAND"},
+   {266, "L1_SingleJet44_BptxAND"},
+   {267, "L1_SingleJet48_BptxAND"},
+   {268, "L1_SingleJet56_BptxAND"},
+   {269, "L1_SingleJet60_BptxAND"},
+   {270, "L1_SingleJet64_BptxAND"},
+   {271, "L1_SingleJet72_BptxAND"},
+   {272, "L1_SingleJet80_BptxAND"},
+   {282, "L1_SingleJet8_Centrality_30_100_BptxAND"},
+   {283, "L1_SingleJet16_Centrality_30_100_BptxAND"},
+   {284, "L1_SingleJet24_Centrality_30_100_BptxAND"},
+   {285, "L1_SingleJet28_Centrality_30_100_BptxAND"},
+   {286, "L1_SingleJet32_Centrality_30_100_BptxAND"},
+   {287, "L1_SingleJet36_Centrality_30_100_BptxAND"},
+   {288, "L1_SingleJet40_Centrality_30_100_BptxAND"},
+   {289, "L1_SingleJet44_Centrality_30_100_BptxAND"},
+   {290, "L1_SingleJet48_Centrality_30_100_BptxAND"},
+   {291, "L1_SingleJet56_Centrality_30_100_BptxAND"},
+   {292, "L1_SingleJet60_Centrality_30_100_BptxAND"},
+   {293, "L1_SingleJet64_Centrality_30_100_BptxAND"},
+   {295, "L1_SingleJet8_Centrality_50_100_BptxAND"},
+   {296, "L1_SingleJet16_Centrality_50_100_BptxAND"},
+   {297, "L1_SingleJet24_Centrality_50_100_BptxAND"},
+   {298, "L1_SingleJet28_Centrality_50_100_BptxAND"},
+   {299, "L1_SingleJet32_Centrality_50_100_BptxAND"},
+   {300, "L1_SingleJet36_Centrality_50_100_BptxAND"},
+   {301, "L1_SingleJet40_Centrality_50_100_BptxAND"},
+   {302, "L1_SingleJet44_Centrality_50_100_BptxAND"},
+   {303, "L1_SingleJet48_Centrality_50_100_BptxAND"},
+   {304, "L1_SingleJet56_Centrality_50_100_BptxAND"},
+   {305, "L1_SingleJet60_Centrality_50_100_BptxAND"},
+   {306, "L1_SingleJet64_Centrality_50_100_BptxAND"},
+   {344, "L1_SingleEG3_BptxAND"},
+   {345, "L1_SingleEG5_BptxAND"},
+   {346, "L1_SingleEG7_BptxAND"},
+   {347, "L1_SingleEG12_BptxAND"},
+   {348, "L1_SingleEG15_BptxAND"},
+   {349, "L1_SingleEG21_BptxAND"},
+   {350, "L1_SingleEG30_BptxAND"},
+   {352, "L1_SingleIsoEG3_BptxAND"},
+   {353, "L1_SingleIsoEG7_BptxAND"},
+   {354, "L1_SingleIsoEG12_BptxAND"},
+   {355, "L1_SingleIsoEG15_BptxAND"},
+   {356, "L1_SingleIsoEG21_BptxAND"},
+   {360, "L1_SingleEG3_NotMinimumBiasHF2_AND_BptxAND"},
+   {361, "L1_SingleEG5_NotMinimumBiasHF2_AND_BptxAND"},
+   {363, "L1_SingleEG3_Centrality_30_100_BptxAND"},
+   {364, "L1_SingleEG7_Centrality_30_100_BptxAND"},
+   {365, "L1_SingleEG15_Centrality_30_100_BptxAND"},
+   {366, "L1_SingleEG21_Centrality_30_100_BptxAND"},
+   {398, "L1_DoubleEG8_BptxAND"},
+   {399, "L1_DoubleEG10_BptxAND"},
+   {402, "L1_DoubleEG2_NotMinimumBiasHF2_AND_BptxAND"},
+   {404, "L1_DoubleEG5_NotMinimumBiasHF2_AND_BptxAND"},
+   {18, "L1_MuShower_OneTight"},
+   {19, "L1_MuShower_OneNominal"},
+   {401, "L1_DoubleEG1_NotMinimumBiasHF2_AND_BptxAND"},
+   {403, "L1_DoubleEG3_NotMinimumBiasHF2_AND_BptxAND"},
+   {359, "L1_SingleEG2_NotMinimumBiasHF2_AND_BptxAND"},
+   {28, "L1_DoubleMuCosmic_NotMinimumBiasHF2_AND_BptxAND"},
+   {203, "L1_SingleMuCosmic_NotMinimumBiasHF2_AND_BptxAND"},
+   {204, "L1_SingleMuOpen_OR_SingleMuCosmic_EMTF_NotMinimumBiasHF2_AND_BptxAND"},
+   {238, "L1_DoubleMuOpen_MaxDr3p5M0to7_BptxAND"},
+   {239, "L1_DoubleMu0_MaxDr3p5M0to7_BptxAND"},
+   {240, "L1_DoubleMuSQ_MaxDr3p5M0to7_BptxAND"},
+   {242, "L1_DoubleMu0_MaxDr3p5_BptxAND"},
+   {243, "L1_DoubleMuSQ_MaxDr3p5_BptxAND"},
+   {320, "L1_Centrality_0_1_BptxAND"},
+   {319, "L1_Centrality_0_0p5_BptxAND"}
 };

@@ -5,6 +5,7 @@ Input:  L1Ntuple made with one of the following menu versions
     L1Menu_CollisionsHeavyIons2022_v0_0_1.xml --> Menu::Y2022_V0_0_1
     L1Menu_CollisionsHeavyIons2022_v0_0_2.xml --> Menu::Y2022_V0_0_2
     L1Menu_CollisionsHeavyIons2022_v0_0_3.xml --> Menu::Y2022_V0_0_3
+    L1Menu_CollisionsHeavyIons2022_v0_0_4.xml --> Menu::Y2022_V0_0_4
 Output: A list of how many times each menu trigger was passed
 Note: If you are using your own custom menu, add it to Menu.h following the instructions in data/README
 */
