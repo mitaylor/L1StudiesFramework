@@ -30,4 +30,4 @@ config.Data.allowNonValidInputDataset = True
 
 #### Site ####
 config.section_('Site')
-config.Site.storageSite = 'T2_US_MIT' # your storage site
+config.Site.storageSite = '' # your storage site

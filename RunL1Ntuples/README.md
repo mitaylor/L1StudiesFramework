@@ -1,17 +1,17 @@
-## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_12_3_0_pre6
+## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_12_4_0
 
 These instructions are for creating only the L1Ntuples without the offline information included.
 
 ### 1. Set up the emulator
 
 ```
-cmsrel CMSSW_12_3_0_pre6
-cd CMSSW_12_3_0_pre6/src
+cmsrel CMSSW_12_4_0
+cd CMSSW_12_4_0/src
 cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0_pre6
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v127.0
+git fetch cms-l1t-offline l1t-integration-CMSSW_12_4_0
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v132.0
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 git cms-merge-topic -u kakwok:CLCT_thresholds
 
@@ -27,12 +27,12 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2022_v0_0_3.xml
+wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2022_v0_0_4.xml
 cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_0_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_3.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_0_1.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_4.xml')
 
 ### 3. Run cmsDriver.py script
 
@@ -43,16 +43,16 @@ Edit runCmsDriver_2018Data.sh or runCmsDriver_Run3MC to change the test data fil
 **For processing Run 2 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_12_3_0_pre1/src
-cd CMSSW_12_3_0_pre1/src
+cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_12_4_0/src
+cd CMSSW_12_4_0/src
 ./runCmsDriver_2018Data.py
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_12_3_0_pre1/src
-cd CMSSW_12_3_0_pre1/src
+cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_12_4_0/src
+cd CMSSW_12_4_0/src
 ./runCmsDriver_Run3MC.py
 ```
 
@@ -73,15 +73,15 @@ cmsRun L1Ntuple_Run3MC.py
 Edit crabConfig_2018Data_L1.py or crabConfig_Run3MC_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_2018Data.py CMSSW_12_3_0_pre1/src
-cd CMSSW_12_3_0_pre1/src
+cp L1StudiesFramework/RunL1Ntuples/crabConfig_2018Data.py CMSSW_12_4_0/src
+cd CMSSW_12_4_0/src
 crab submit crabConfig_2018Data_L1.py
 ```
 
 or
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_12_3_0_pre1/src
-cd CMSSW_12_3_0_pre1/src
+cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_12_4_0/src
+cd CMSSW_12_4_0/src
 crab submit crabConfig_Run3MC_L1.py
 ```
