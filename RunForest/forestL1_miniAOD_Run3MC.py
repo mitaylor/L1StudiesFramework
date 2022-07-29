@@ -271,10 +271,10 @@ from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU
 process = L1NtupleRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
-from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParams_2018_v1_4_1 
+from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_3 
 
-#call to customisation function L1TSettingsToCaloParams_2018_v1_4_1 imported from L1Trigger.Configuration.customiseSettings
-process = L1TSettingsToCaloParams_2018_v1_4_1(process)
+#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_3 imported from L1Trigger.Configuration.customiseSettings
+process = L1TSettingsToCaloParamsHI_2022_v0_3(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseUtils
 from L1Trigger.Configuration.customiseUtils import L1TGlobalMenuXML 
