@@ -294,4 +294,4 @@ process = customiseEarlyDelete(process)
 
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
-process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 16)
+process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
