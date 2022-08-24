@@ -16,5 +16,5 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --python_filename=${config}.py \
 echo '
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
-process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 16)
+process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 ' >> ${config}.py
