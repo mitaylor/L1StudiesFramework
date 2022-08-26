@@ -1,0 +1,292 @@
+#include "TFile.h"
+#include "TDirectory.h"
+#include "TSystemDirectory.h"
+#include "TSystemFile.h"
+#include "TChain.h"
+
+#include "TTreeReader.h"
+#include "TTreeReaderValue.h"
+
+#include "TMath.h"
+#include "TH1F.h"
+#include "TGraphAsymmErrors.h"
+#include "TCanvas.h"
+#include "TLegend.h"
+#include "TLatex.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+void FormatHistogram(TH1F* hist, int color) {
+    hist->SetMarkerColor(color);
+    hist->SetLineColor(color);
+    hist->SetMarkerSize(0.5);
+    hist->SetMarkerStyle(20);
+    hist->SetStats(0);
+    hist->GetXaxis()->CenterTitle(true);
+    hist->GetYaxis()->SetTitle("Normalized Counts");
+    hist->GetYaxis()->CenterTitle(true);
+}
+
+void PrintHist(TH1* hist1, TH1* hist2, string title, TCanvas* canvas, TLegend* legend, string filename) {
+    hist1->GetXaxis()->SetTitle(title.c_str());
+    hist1->Draw("HIST LP");
+    hist2->Draw("HIST LP SAME");
+    legend->Draw();
+
+    TLatex* newMean = new TLatex();
+    string newMeanText;
+    newMean->SetTextFont(43);
+    newMean->SetTextSize(12);
+    newMean->SetTextColor(30);
+
+    TLatex* oldMean = new TLatex();
+    string oldMeanText;
+    oldMean->SetTextFont(43);
+    oldMean->SetTextSize(12);
+    oldMean->SetTextColor(46);
+
+    oldMeanText = "2018 Mean: " + to_string(hist2->GetMean());
+    oldMean->DrawLatexNDC(0.6, 0.64, oldMeanText.c_str());
+    newMeanText = "2022 Mean: " + to_string(hist1->GetMean());
+    newMean->DrawLatexNDC(0.6, 0.60, newMeanText.c_str());
+    canvas->Print(filename.c_str());
+}
+
+void GetFiles(char const* input, vector<string>& files) {
+    TSystemDirectory dir(input, input);
+    TList *list = dir.GetListOfFiles();
+
+    if (list) {
+        TSystemFile *file;
+        string fname;
+        TIter next(list);
+        while ((file = (TSystemFile*) next())) {
+            fname = file->GetName();
+
+            if (file->IsDirectory() && (fname.find(".") == string::npos)) {
+                string newDir = string(input) + fname + "/";
+                GetFiles(newDir.c_str(), files);
+            }
+            else if ((fname.find(".root") != string::npos)) {
+                files.push_back(string(input) + fname);
+                cout << files.back() << endl;
+            }
+        }
+    }
+
+    return;
+}
+
+void FillChain(TChain& chain, vector<string>& files) {
+    for (auto file : files) {
+        chain.Add(file.c_str());
+    }
+}
+
+int Compare(char const* oldInput, char const* newInput) {
+    /* create map of bit number to energy sum */
+    map<int, string> EnergySum = {
+        {0, "etSumTotalEt"},
+        {1, "etSumTotalEtHF"},
+        {2, "etSumTotalEtEm"},
+        {3, "etSumMinBiasHFP0"},
+        {4, "htSumht"},
+        {5, "htSumhtHF"},
+        {6, "etSumMinBiasHFM0"},
+        {7, "etSumMissingEt"},
+        {8, "etSumMinBiasHFP1"},
+        {9, "htSumMissingHt"},
+        {10, "etSumMinBiasHFM1"},
+        {11, "etSumMissingEtHF"},
+        {12, "htSumMissingHtHF"},
+        {13, "etSumTowCount"},
+        {14, "etAsym"},
+        {15, "etHFAsym"},
+        {16, "htAsym"},
+        {17, "htHFAsym"},
+        {18, "centrality"}
+    };
+
+    /* read in 2018 information */
+    vector<string> oldFiles;
+    GetFiles(oldInput, oldFiles);
+
+    TChain oldEnergySumChain("l1UpgradeEmuTree/L1UpgradeTree");
+    TChain oldCaloTowerChain("l1CaloTowerEmuTree/L1CaloTowerTree");
+    FillChain(oldEnergySumChain, oldFiles);
+    FillChain(oldCaloTowerChain, oldFiles);
+    TTreeReader oldCaloTowerReader(&oldCaloTowerChain);
+    TTreeReaderValue<short> oldCaloNTowers(oldCaloTowerReader, "nTower");
+    TTreeReaderValue<vector<short>> oldCaloIEt(oldCaloTowerReader, "iet");
+    TTreeReaderValue<vector<short>> oldCaloIEm(oldCaloTowerReader, "iem");
+    TTreeReaderValue<vector<short>> oldCaloIHad(oldCaloTowerReader, "ihad");
+    TTreeReaderValue<vector<short>> oldCaloIEta(oldCaloTowerReader, "ieta");
+    TTreeReaderValue<vector<short>> oldCaloIPhi(oldCaloTowerReader, "iphi");
+
+    /* read in 2022 information */
+    vector<string> newFiles;
+    GetFiles(newInput, newFiles);
+
+    TChain newEnergySumChain("l1UpgradeEmuTree/L1UpgradeTree");
+    TChain newCaloTowerChain("l1CaloTowerEmuTree/L1CaloTowerTree");
+    FillChain(newEnergySumChain, newFiles);
+    FillChain(newCaloTowerChain, newFiles);
+    TTreeReader newCaloTowerReader(&newCaloTowerChain);
+    TTreeReaderValue<short> newCaloNTowers(newCaloTowerReader, "nTower");
+    TTreeReaderValue<vector<short>> newCaloIEt(newCaloTowerReader, "iet");
+    TTreeReaderValue<vector<short>> newCaloIEm(newCaloTowerReader, "iem");
+    TTreeReaderValue<vector<short>> newCaloIHad(newCaloTowerReader, "ihad");
+    TTreeReaderValue<vector<short>> newCaloIEta(newCaloTowerReader, "ieta");
+    TTreeReaderValue<vector<short>> newCaloIPhi(newCaloTowerReader, "iphi");
+
+    /* create histograms for energy sum plots */
+    int nbins = 40;
+    float min = 0;
+    float max = 2048;
+
+    size_t size = EnergySum.size();
+
+    auto oldEnergySumHist = new TH1F("oldEnergySumHist", "", nbins, min, max);
+    auto newEnergySumHist = new TH1F("newEnergySumHist", "", nbins, min, max);
+
+    int oldEntries = oldEnergySumChain.GetEntries();
+    int newEntries = newEnergySumChain.GetEntries();
+
+    /* customize energy sum histogram draw options */
+    auto legend = new TLegend(0.55, 0.75 ,0.85, 0.85);
+    legend->SetTextSize(0.03);
+    legend->AddEntry(oldEnergySumHist, "2018 MB MC", "p");
+    legend->AddEntry(newEnergySumHist, "2022 MB MC", "p");
+
+    FormatHistogram(newEnergySumHist, 30);
+    FormatHistogram(oldEnergySumHist, 46);
+
+    /* plot the energy sum distributions */
+    auto canvas = new TCanvas("canvas", "", 0 , 0, 500, 500);
+    canvas->SetLeftMargin(0.15);
+    canvas->SetBottomMargin(0.15);
+    canvas->Print("EnergySums.pdf[");
+
+    for (size_t i = 0; i < size; ++i) {
+        canvas->Clear();
+
+        string oldDrawCommand = "sumEt[" + to_string(i) + "] >> oldEnergySumHist";
+        string newDrawCommand = "sumEt[" + to_string(i) + "] >> newEnergySumHist";
+
+        oldEnergySumChain.Draw(oldDrawCommand.c_str(), "", "goff");
+        newEnergySumChain.Draw(newDrawCommand.c_str(), "", "goff");
+
+        oldEnergySumHist->Scale(1.0/oldEntries);
+        newEnergySumHist->Scale(1.0/newEntries);
+
+        PrintHist(newEnergySumHist, oldEnergySumHist, EnergySum[i], canvas, legend, "EnergySums.pdf");
+    }
+
+    canvas->Print("EnergySums.pdf]");
+
+    /* create histograms for caloTower plots */
+    auto oldCaloNTowersHist = new TH1F("oldCaloNTowersHist", "", nbins, 0, 500);
+    auto oldCaloIEtHist = new TH1F("oldCaloIEtHist", "", nbins, 0, 1000);
+    auto oldCaloIEmHist = new TH1F("oldCaloIEmHist", "", nbins, 0, 1000);
+    auto oldCaloIHadHist = new TH1F("oldCaloIHadHist", "", nbins, 0, 1000);
+
+    auto newCaloNTowersHist = new TH1F("newCaloNTowersHist", "", nbins, 0, 500);
+    auto newCaloIEtHist = new TH1F("newCaloIEtHist", "", nbins, 0, 1000);
+    auto newCaloIEmHist = new TH1F("newCaloIEmHist", "", nbins, 0, 1000);
+    auto newCaloIHadHist = new TH1F("newCaloIHadHist", "", nbins, 0, 1000);
+
+    /* customize calo tower histogram draw options */
+    FormatHistogram(oldCaloNTowersHist, 46);
+    FormatHistogram(oldCaloIEtHist, 46);
+    FormatHistogram(oldCaloIEmHist, 46);
+    FormatHistogram(oldCaloIHadHist, 46);
+
+    FormatHistogram(newCaloNTowersHist, 30);
+    FormatHistogram(newCaloIEtHist, 30);
+    FormatHistogram(newCaloIEmHist, 30);
+    FormatHistogram(newCaloIHadHist, 30);
+
+    /* read in information from TTrees */
+    for (int i = 1; i < oldEntries; ++i) {
+        oldCaloTowerReader.Next();
+        if (i % (oldEntries / 20) == 0) cout << i << " / " << oldEntries << endl;
+
+        int et = 0;
+        int em = 0;
+        int had = 0;
+
+        for (int j = 0; j < (*oldCaloNTowers); ++j) {
+            if (TMath::Abs((*oldCaloIEta)[j]) < 30) {
+                et += (*oldCaloIEt)[j];
+                em += (*oldCaloIEm)[j];
+                had += (*oldCaloIHad)[j];
+            }
+        }
+
+
+        oldCaloNTowersHist->Fill(*oldCaloNTowers);
+        oldCaloIEtHist->Fill(et);
+        oldCaloIEmHist->Fill(em);
+        oldCaloIHadHist->Fill(had);
+    }
+
+    for (int i = 1; i < newEntries; ++i) {
+        newCaloTowerReader.Next();
+        if (i % (newEntries / 20) == 0) cout << i << " / " << newEntries << endl;
+
+        int et = 0;
+        int em = 0;
+        int had = 0;
+
+        for (int j = 0; j < (*newCaloNTowers); ++j) {
+            if (TMath::Abs((*newCaloIEta)[j]) < 30) {
+                et += (*newCaloIEt)[j];
+                em += (*newCaloIEm)[j];
+                had += (*newCaloIHad)[j];
+            }
+        }
+
+        newCaloNTowersHist->Fill(*newCaloNTowers);
+        newCaloIEtHist->Fill(et);
+        newCaloIEmHist->Fill(em);
+        newCaloIHadHist->Fill(had);
+    }
+
+    /* scale the histograms */
+    oldCaloNTowersHist->Scale(1.0/oldEntries);
+    oldCaloIEtHist->Scale(1.0/oldEntries);
+    oldCaloIEmHist->Scale(1.0/oldEntries);
+    oldCaloIHadHist->Scale(1.0/oldEntries);
+    newCaloNTowersHist->Scale(1.0/newEntries);
+    newCaloIEtHist->Scale(1.0/newEntries);
+    newCaloIEmHist->Scale(1.0/newEntries);
+    newCaloIHadHist->Scale(1.0/newEntries);
+
+    /* plot the caloTower distributions */
+    canvas->Print("CaloTowers.pdf[");
+    canvas->Clear();
+
+    PrintHist(newCaloNTowersHist, oldCaloNTowersHist, "nTowers", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIEtHist, oldCaloIEtHist, "Et Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIEmHist, oldCaloIEmHist, "EM Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIHadHist, oldCaloIHadHist, "Had Sum", canvas, legend, "CaloTowers.pdf");
+
+    canvas->Print("CaloTowers.pdf]");
+
+   
+    return 0;
+}
+
+int main(int argc, char* argv[]) {
+    if (argc == 3)
+        return Compare(argv[1], argv[2]);
+
+    else {
+        cout << "ERROR: Please pass two paths for 2018 MC and 2022 MC." << endl;
+        return -1;
+    }
+}
