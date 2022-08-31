@@ -164,7 +164,7 @@ int Compare(char const* oldInput, char const* newInput) {
     /* create histograms for energy sum plots */
     int nbins = 40;
     float min = 0;
-    float max = 2048;
+    float max = 3000;
 
     size_t size = EnergySum.size();
 
@@ -207,17 +207,29 @@ int Compare(char const* oldInput, char const* newInput) {
     canvas->Print("EnergySums.pdf]");
 
     /* create histograms for caloTower plots */
-    auto oldCaloNTowersHist = new TH1F("oldCaloNTowersHist", "", nbins, 0, 500);
-    auto oldCaloIEtHist = new TH1F("oldCaloIEtHist", "", nbins, 0, 1000);
-    auto oldCaloIEmHist = new TH1F("oldCaloIEmHist", "", nbins, 0, 1000);
-    auto oldCaloIHadHist = new TH1F("oldCaloIHadHist", "", nbins, 0, 1000);
-    auto oldCaloIHFHist = new TH1F("oldCaloIHFHist", "", nbins, 0, 1000);
+    auto oldCaloNTowersHist = new TH1F("oldCaloNTowersHist", "", nbins*2, 0, 5500);
+    auto oldCaloIEtHist = new TH1F("oldCaloIEtHist", "", nbins*2, 0, 30000);
+    auto oldCaloIEmHist = new TH1F("oldCaloIEmHist", "", nbins*2, 0, 9000);
+    auto oldCaloIHadHist = new TH1F("oldCaloIHadHist", "", nbins*2, 0, 9000);
+    auto oldCaloIHFHist = new TH1F("oldCaloIHFHist", "", nbins*2, 0, 13000);
 
-    auto newCaloNTowersHist = new TH1F("newCaloNTowersHist", "", nbins, 0, 500);
-    auto newCaloIEtHist = new TH1F("newCaloIEtHist", "", nbins, 0, 1000);
-    auto newCaloIEmHist = new TH1F("newCaloIEmHist", "", nbins, 0, 1000);
-    auto newCaloIHadHist = new TH1F("newCaloIHadHist", "", nbins, 0, 1000);
-    auto newCaloIHFHist = new TH1F("newCaloIHFHist", "", nbins, 0, 1000);
+    auto newCaloNTowersHist = new TH1F("newCaloNTowersHist", "", nbins*2, 0, 5500);
+    auto newCaloIEtHist = new TH1F("newCaloIEtHist", "", nbins*2, 0, 30000);
+    auto newCaloIEmHist = new TH1F("newCaloIEmHist", "", nbins*2, 0, 9000);
+    auto newCaloIHadHist = new TH1F("newCaloIHadHist", "", nbins*2, 0, 9000);
+    auto newCaloIHFHist = new TH1F("newCaloIHFHist", "", nbins*2, 0, 13000);
+
+    auto oldCaloNTowersHistZoom = new TH1F("oldCaloNTowersHistZoom", "", nbins, 0, 550);
+    auto oldCaloIEtHistZoom = new TH1F("oldCaloIEtHistZoom", "", nbins, 0, 3000);
+    auto oldCaloIEmHistZoom = new TH1F("oldCaloIEmHistZoom", "", nbins, 0, 900);
+    auto oldCaloIHadHistZoom = new TH1F("oldCaloIHadHistZoom", "", nbins, 0, 900);
+    auto oldCaloIHFHistZoom = new TH1F("oldCaloIHFHistZoom", "", nbins, 0, 1300);
+
+    auto newCaloNTowersHistZoom = new TH1F("newCaloNTowersHistZoom", "", nbins, 0, 550);
+    auto newCaloIEtHistZoom = new TH1F("newCaloIEtHistZoom", "", nbins, 0, 3000);
+    auto newCaloIEmHistZoom = new TH1F("newCaloIEmHistZoom", "", nbins, 0, 900);
+    auto newCaloIHadHistZoom = new TH1F("newCaloIHadHistZoom", "", nbins, 0, 900);
+    auto newCaloIHFHistZoom = new TH1F("newCaloIHFHistZoom", "", nbins, 0, 1300);
 
     auto oldCaloIEtEtaPhiHist = new TProfile2D("oldCaloIEtEtaPhiHist", "2018 Average Et", 84, -42, 42, 73, 0, 73);
     auto oldCaloIEmEtaPhiHist = new TProfile2D("oldCaloIEmEtaPhiHist", "2018 Average Em", 84, -42, 42, 73, 0, 73);
@@ -242,6 +254,18 @@ int Compare(char const* oldInput, char const* newInput) {
     FormatHistogram(newCaloIHadHist, 30);
     FormatHistogram(newCaloIHFHist, 30);
 
+    FormatHistogram(oldCaloNTowersHistZoom, 46);
+    FormatHistogram(oldCaloIEtHistZoom, 46);
+    FormatHistogram(oldCaloIEmHistZoom, 46);
+    FormatHistogram(oldCaloIHadHistZoom, 46);
+    FormatHistogram(oldCaloIHFHistZoom, 46);
+
+    FormatHistogram(newCaloNTowersHistZoom, 30);
+    FormatHistogram(newCaloIEtHistZoom, 30);
+    FormatHistogram(newCaloIEmHistZoom, 30);
+    FormatHistogram(newCaloIHadHistZoom, 30);
+    FormatHistogram(newCaloIHFHistZoom, 30);
+
     FormatHistogramProf2D(oldCaloIEtEtaPhiHist, 8);
     FormatHistogramProf2D(oldCaloIEmEtaPhiHist, 3.5);
     FormatHistogramProf2D(oldCaloIHadEtaPhiHist, 4);
@@ -262,11 +286,11 @@ int Compare(char const* oldInput, char const* newInput) {
         int had = 0;
 
         for (int j = 0; j < (*oldCaloNTowers); ++j) {
-            if (TMath::Abs((*oldCaloIEta)[j]) < 30) {
+            // if (TMath::Abs((*oldCaloIEta)[j]) < 30) {
                 et += (*oldCaloIEt)[j];
                 em += (*oldCaloIEm)[j];
                 had += (*oldCaloIHad)[j];
-            }
+            // }
 
             oldCaloIEtEtaPhiHist->Fill((*oldCaloIEta)[j], (*oldCaloIPhi)[j], (*oldCaloIEt)[j]);
             oldCaloIEmEtaPhiHist->Fill((*oldCaloIEta)[j], (*oldCaloIPhi)[j], (*oldCaloIEm)[j]);
@@ -280,6 +304,12 @@ int Compare(char const* oldInput, char const* newInput) {
         oldCaloIEmHist->Fill(em);
         oldCaloIHadHist->Fill(had);
         oldCaloIHFHist->Fill(et-em-had);
+
+        oldCaloNTowersHistZoom->Fill(*oldCaloNTowers);
+        oldCaloIEtHistZoom->Fill(et);
+        oldCaloIEmHistZoom->Fill(em);
+        oldCaloIHadHistZoom->Fill(had);
+        oldCaloIHFHistZoom->Fill(et-em-had);
     }
 
     for (int i = 1; i < newEntries; ++i) {
@@ -291,11 +321,11 @@ int Compare(char const* oldInput, char const* newInput) {
         int had = 0;
 
         for (int j = 0; j < (*newCaloNTowers); ++j) {
-            if (TMath::Abs((*newCaloIEta)[j]) < 30) {
+            // if (TMath::Abs((*newCaloIEta)[j]) < 30) {
                 et += (*newCaloIEt)[j];
                 em += (*newCaloIEm)[j];
                 had += (*newCaloIHad)[j];
-            }
+            // }
 
             newCaloIEtEtaPhiHist->Fill((*newCaloIEta)[j], (*newCaloIPhi)[j], (*newCaloIEt)[j]);
             newCaloIEmEtaPhiHist->Fill((*newCaloIEta)[j], (*newCaloIPhi)[j], (*newCaloIEm)[j]);
@@ -308,6 +338,12 @@ int Compare(char const* oldInput, char const* newInput) {
         newCaloIEmHist->Fill(em);
         newCaloIHadHist->Fill(had);
         newCaloIHFHist->Fill(et-em-had);
+
+        newCaloNTowersHistZoom->Fill(*newCaloNTowers);
+        newCaloIEtHistZoom->Fill(et);
+        newCaloIEmHistZoom->Fill(em);
+        newCaloIHadHistZoom->Fill(had);
+        newCaloIHFHistZoom->Fill(et-em-had);
     }
 
     /* scale the histograms */
@@ -316,14 +352,28 @@ int Compare(char const* oldInput, char const* newInput) {
     oldCaloIEmHist->Scale(1.0/oldEntries);
     oldCaloIHadHist->Scale(1.0/oldEntries);
     oldCaloIHFHist->Scale(1.0/oldEntries);
+
+    oldCaloNTowersHistZoom->Scale(1.0/oldEntries);
+    oldCaloIEtHistZoom->Scale(1.0/oldEntries);
+    oldCaloIEmHistZoom->Scale(1.0/oldEntries);
+    oldCaloIHadHistZoom->Scale(1.0/oldEntries);
+    oldCaloIHFHistZoom->Scale(1.0/oldEntries);
+
     newCaloNTowersHist->Scale(1.0/newEntries);
     newCaloIEtHist->Scale(1.0/newEntries);
     newCaloIEmHist->Scale(1.0/newEntries);
     newCaloIHadHist->Scale(1.0/newEntries);
     newCaloIHFHist->Scale(1.0/newEntries);
 
+    newCaloNTowersHistZoom->Scale(1.0/newEntries);
+    newCaloIEtHistZoom->Scale(1.0/newEntries);
+    newCaloIEmHistZoom->Scale(1.0/newEntries);
+    newCaloIHadHistZoom->Scale(1.0/newEntries);
+    newCaloIHFHistZoom->Scale(1.0/newEntries);
+
     /* plot the caloTower distributions */
     canvas->Print("CaloTowers.pdf[");
+    canvas->SetLogy(1);
     canvas->Clear();
 
     PrintHist(newCaloNTowersHist, oldCaloNTowersHist, "nTowers", canvas, legend, "CaloTowers.pdf");
@@ -332,9 +382,16 @@ int Compare(char const* oldInput, char const* newInput) {
     PrintHist(newCaloIHadHist, oldCaloIHadHist, "Had Sum", canvas, legend, "CaloTowers.pdf");
     PrintHist(newCaloIHFHist, oldCaloIHFHist, "HF Sum", canvas, legend, "CaloTowers.pdf");
 
+    PrintHist(newCaloNTowersHistZoom, oldCaloNTowersHistZoom, "nTowers", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIEtHistZoom, oldCaloIEtHistZoom, "Et Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIEmHistZoom, oldCaloIEmHistZoom, "EM Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIHadHistZoom, oldCaloIHadHistZoom, "Had Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloIHFHistZoom, oldCaloIHFHistZoom, "HF Sum", canvas, legend, "CaloTowers.pdf");
+
     canvas->Print("CaloTowers.pdf]");
 
     canvas->Print("CaloTowersEtaPhi.pdf[");
+    canvas->SetLogy(0);
     canvas->Clear();
 
     PrintHistProf2D(newCaloIEtEtaPhiHist, oldCaloIEtEtaPhiHist, canvas, "CaloTowersEtaPhi.pdf");
