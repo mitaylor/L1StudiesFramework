@@ -84,7 +84,7 @@ process.options = cms.untracked.PSet(
 )
 
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2021_realistic_hi', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2022_realistic_hi', '')
 process.HiForestInfo.GlobalTagLabel = process.GlobalTag.globaltag
 process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
 process.GlobalTag.toGet.extend([
@@ -271,10 +271,10 @@ from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU
 process = L1NtupleRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
-from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_3 
+from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_4 
 
-#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_3 imported from L1Trigger.Configuration.customiseSettings
-process = L1TSettingsToCaloParamsHI_2022_v0_3(process)
+#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_4 imported from L1Trigger.Configuration.customiseSettings
+process = L1TSettingsToCaloParamsHI_2022_v0_4(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseUtils
 from L1Trigger.Configuration.customiseUtils import L1TGlobalMenuXML 
@@ -295,3 +295,11 @@ process = customiseEarlyDelete(process)
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
 process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
+
+process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
+    digiLabel = cms.untracked.InputTag("hcalDigis"),
+    minimized = cms.untracked.bool(True)
+)
+
+process.HFAdc = cms.Path(process.HFAdcana)
+process.schedule.append(process.HFAdc)

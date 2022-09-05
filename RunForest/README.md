@@ -11,9 +11,10 @@ cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
 git fetch cms-l1t-offline l1t-integration-CMSSW_12_4_0
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v132.0
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v134
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 git cms-merge-topic CmsHI:forest_CMSSW_12_4_0
+svn export https://github.com/boundino/HltL1Run2021.git/trunk/L1/ADC
 git cms-merge-topic -u kakwok:CLCT_thresholds
 
 git cms-checkdeps -A -a
@@ -28,12 +29,12 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2022_v0_0_5.xml
+wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2022_v1_0_0.xml
 cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_0_1.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v0_0_5.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_1_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2022_v1_0_0.xml')
 
 ### 3. Do a local test of cmsRun
 
@@ -66,5 +67,5 @@ or
 ```
 cp L1StudiesFramework/RunForest/crabConfig_Run3MC_ForestL1.py CMSSW_12_4_0/src
 cd CMSSW_12_4_0/src
-crab submit crabConfig_Run3MC_ForestL1.py
+crab submit -c crabConfig_Run3MC_ForestL1.py
 ```

@@ -303,4 +303,12 @@ process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10)
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
 process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 
+process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
+    digiLabel = cms.untracked.InputTag("hcalDigis"),
+    minimized = cms.untracked.bool(True)
+)
+
+process.HFAdc = cms.Path(process.HFAdcana)
+process.schedule.append(process.HFAdc)
+
 MassReplaceInputTag(process, new="rawDataMapperByLabel", old="rawDataCollector")
