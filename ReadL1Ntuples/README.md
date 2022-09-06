@@ -1,6 +1,6 @@
 ### Summary
 
-This is an example for how to read the emulated trigger decisions from L1Ntuples created with a Heavy Ion menu. Versions between L1Menu_CollisionsHeavyIons2018_v4_2_0.xml and L1Menu_CollisionsHeavyIons2022_v0_0_5 are supported. If you need a test file please contact me.
+This is an example for how to read the emulated trigger decisions from L1Ntuples created with a Heavy Ion menu. Versions between L1Menu_CollisionsHeavyIons2018_v4_2_0.xml and L1Menu_CollisionsHeavyIons2022_v1_0_0 are supported. If you need a test file please contact me.
 
 If you are using a custom menu, you can add a menu map to include/Menu.h by using the script data/makeMenuMap.sh to process your custom menu. Please contact me if you need help.
 
