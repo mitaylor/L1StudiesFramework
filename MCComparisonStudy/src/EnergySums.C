@@ -187,7 +187,7 @@ int Compare(char const* oldInput, char const* newInput) {
     auto canvas = new TCanvas("canvas", "", 0 , 0, 500, 500);
     canvas->SetLeftMargin(0.15);
     canvas->SetBottomMargin(0.15);
-    canvas->Print("EnergySums.pdf[");
+    canvas->Print("L1EnergySums.pdf[");
 
     for (size_t i = 0; i < size; ++i) {
         canvas->Clear();
@@ -201,10 +201,10 @@ int Compare(char const* oldInput, char const* newInput) {
         oldEnergySumHist->Scale(1.0/oldEntries);
         newEnergySumHist->Scale(1.0/newEntries);
 
-        PrintHist(newEnergySumHist, oldEnergySumHist, EnergySum[i], canvas, legend, "EnergySums.pdf");
+        PrintHist(newEnergySumHist, oldEnergySumHist, EnergySum[i], canvas, legend, "L1EnergySums.pdf");
     }
 
-    canvas->Print("EnergySums.pdf]");
+    canvas->Print("L1EnergySums.pdf]");
 
     /* create histograms for caloTower plots */
     auto oldCaloNTowersHist = new TH1F("oldCaloNTowersHist", "", nbins*2, 0, 5500);
@@ -372,34 +372,34 @@ int Compare(char const* oldInput, char const* newInput) {
     newCaloIHFHistZoom->Scale(1.0/newEntries);
 
     /* plot the caloTower distributions */
-    canvas->Print("CaloTowers.pdf[");
+    canvas->Print("L1CaloTowers.pdf[");
     canvas->SetLogy(1);
     canvas->Clear();
 
-    PrintHist(newCaloNTowersHist, oldCaloNTowersHist, "nTowers", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIEtHist, oldCaloIEtHist, "Et Sum", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIEmHist, oldCaloIEmHist, "EM Sum", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIHadHist, oldCaloIHadHist, "Had Sum", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIHFHist, oldCaloIHFHist, "HF Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloNTowersHist, oldCaloNTowersHist, "nTowers", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIEtHist, oldCaloIEtHist, "Et Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIEmHist, oldCaloIEmHist, "EM Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIHadHist, oldCaloIHadHist, "Had Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIHFHist, oldCaloIHFHist, "HF Sum", canvas, legend, "L1CaloTowers.pdf");
 
-    PrintHist(newCaloNTowersHistZoom, oldCaloNTowersHistZoom, "nTowers", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIEtHistZoom, oldCaloIEtHistZoom, "Et Sum", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIEmHistZoom, oldCaloIEmHistZoom, "EM Sum", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIHadHistZoom, oldCaloIHadHistZoom, "Had Sum", canvas, legend, "CaloTowers.pdf");
-    PrintHist(newCaloIHFHistZoom, oldCaloIHFHistZoom, "HF Sum", canvas, legend, "CaloTowers.pdf");
+    PrintHist(newCaloNTowersHistZoom, oldCaloNTowersHistZoom, "nTowers", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIEtHistZoom, oldCaloIEtHistZoom, "Et Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIEmHistZoom, oldCaloIEmHistZoom, "EM Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIHadHistZoom, oldCaloIHadHistZoom, "Had Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIHFHistZoom, oldCaloIHFHistZoom, "HF Sum", canvas, legend, "L1CaloTowers.pdf");
 
-    canvas->Print("CaloTowers.pdf]");
+    canvas->Print("L1CaloTowers.pdf]");
 
-    canvas->Print("CaloTowersEtaPhi.pdf[");
+    canvas->Print("L1CaloTowersEtaPhi.pdf[");
     canvas->SetLogy(0);
     canvas->Clear();
 
-    PrintHistProf2D(newCaloIEtEtaPhiHist, oldCaloIEtEtaPhiHist, canvas, "CaloTowersEtaPhi.pdf");
-    PrintHistProf2D(newCaloIEmEtaPhiHist, oldCaloIEmEtaPhiHist, canvas, "CaloTowersEtaPhi.pdf");
-    PrintHistProf2D(newCaloIHadEtaPhiHist, oldCaloIHadEtaPhiHist, canvas, "CaloTowersEtaPhi.pdf");
-    PrintHistProf2D(newCaloIHFEtaPhiHist, oldCaloIHFEtaPhiHist, canvas, "CaloTowersEtaPhi.pdf");
+    PrintHistProf2D(newCaloIEtEtaPhiHist, oldCaloIEtEtaPhiHist, canvas, "L1CaloTowersEtaPhi.pdf");
+    PrintHistProf2D(newCaloIEmEtaPhiHist, oldCaloIEmEtaPhiHist, canvas, "L1CaloTowersEtaPhi.pdf");
+    PrintHistProf2D(newCaloIHadEtaPhiHist, oldCaloIHadEtaPhiHist, canvas, "L1CaloTowersEtaPhi.pdf");
+    PrintHistProf2D(newCaloIHFEtaPhiHist, oldCaloIHFEtaPhiHist, canvas, "L1CaloTowersEtaPhi.pdf");
 
-    canvas->Print("CaloTowersEtaPhi.pdf]");
+    canvas->Print("L1CaloTowersEtaPhi.pdf]");
 
    
     return 0;
