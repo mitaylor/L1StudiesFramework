@@ -210,14 +210,14 @@ int Compare(char const* oldInput, char const* newInput) {
     auto oldCaloNTowersHist = new TH1F("oldCaloNTowersHist", "", nbins*2, 0, 5500);
     auto oldCaloIEtHist = new TH1F("oldCaloIEtHist", "", nbins*2, 0, 30000);
     auto oldCaloIEmHist = new TH1F("oldCaloIEmHist", "", nbins*2, 0, 9000);
-    auto oldCaloIHBHist = new TH1F("oldCaloIHBHist", "", nbins*2, 0, 2000);
+    auto oldCaloIHBHist = new TH1F("oldCaloIHBHist", "", nbins*2, 0, 2500);
     auto oldCaloIHEHist = new TH1F("oldCaloIHEHist", "", nbins*2, 0, 7000);
     auto oldCaloIHFHist = new TH1F("oldCaloIHFHist", "", nbins*2, 0, 13000);
 
     auto newCaloNTowersHist = new TH1F("newCaloNTowersHist", "", nbins*2, 0, 5500);
     auto newCaloIEtHist = new TH1F("newCaloIEtHist", "", nbins*2, 0, 30000);
     auto newCaloIEmHist = new TH1F("newCaloIEmHist", "", nbins*2, 0, 9000);
-    auto newCaloIHBHist = new TH1F("newCaloIHBHist", "", nbins*2, 0, 2000);
+    auto newCaloIHBHist = new TH1F("newCaloIHBHist", "", nbins*2, 0, 2500);
     auto newCaloIHEHist = new TH1F("newCaloIHEHist", "", nbins*2, 0, 7000);
     auto newCaloIHFHist = new TH1F("newCaloIHFHist", "", nbins*2, 0, 13000);
 
@@ -350,12 +350,14 @@ int Compare(char const* oldInput, char const* newInput) {
 
         newCaloNTowersHist->Fill(*newCaloNTowers);
         newCaloIEtHist->Fill(et);
+        newCaloIEmHist->Fill(em);
         newCaloIHBHist->Fill(hb);
         newCaloIHEHist->Fill(he);
         newCaloIHFHist->Fill(et-em-hb-he);
 
         newCaloNTowersHistZoom->Fill(*newCaloNTowers);
         newCaloIEtHistZoom->Fill(et);
+        newCaloIEmHistZoom->Fill(em);
         newCaloIHBHistZoom->Fill(hb);
         newCaloIHEHistZoom->Fill(he);
         newCaloIHFHistZoom->Fill(et-em-hb-he);
@@ -398,15 +400,15 @@ int Compare(char const* oldInput, char const* newInput) {
     PrintHist(newCaloNTowersHist, oldCaloNTowersHist, "nTowers", canvas, legend, "L1CaloTowers.pdf");
     PrintHist(newCaloIEtHist, oldCaloIEtHist, "Et Sum", canvas, legend, "L1CaloTowers.pdf");
     PrintHist(newCaloIEmHist, oldCaloIEmHist, "EM Sum", canvas, legend, "L1CaloTowers.pdf");
-    PrintHist(newCaloIHBHist, oldCaloIHBHist, "HB Sum", canvas, legend, "RechitTowers.pdf");
-    PrintHist(newCaloIHEHist, oldCaloIHEHist, "HE Sum", canvas, legend, "RechitTowers.pdf");
+    PrintHist(newCaloIHBHist, oldCaloIHBHist, "HB Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIHEHist, oldCaloIHEHist, "HE Sum", canvas, legend, "L1CaloTowers.pdf");
     PrintHist(newCaloIHFHist, oldCaloIHFHist, "HF Sum", canvas, legend, "L1CaloTowers.pdf");
 
     PrintHist(newCaloNTowersHistZoom, oldCaloNTowersHistZoom, "nTowers", canvas, legend, "L1CaloTowers.pdf");
     PrintHist(newCaloIEtHistZoom, oldCaloIEtHistZoom, "Et Sum", canvas, legend, "L1CaloTowers.pdf");
     PrintHist(newCaloIEmHistZoom, oldCaloIEmHistZoom, "EM Sum", canvas, legend, "L1CaloTowers.pdf");
-    PrintHist(newCaloIHBHistZoom, oldCaloIHBHistZoom, "HB Sum", canvas, legend, "RechitTowers.pdf");
-    PrintHist(newCaloIHEHistZoom, oldCaloIHEHistZoom, "HE Sum", canvas, legend, "RechitTowers.pdf");
+    PrintHist(newCaloIHBHistZoom, oldCaloIHBHistZoom, "HB Sum", canvas, legend, "L1CaloTowers.pdf");
+    PrintHist(newCaloIHEHistZoom, oldCaloIHEHistZoom, "HE Sum", canvas, legend, "L1CaloTowers.pdf");
     PrintHist(newCaloIHFHistZoom, oldCaloIHFHistZoom, "HF Sum", canvas, legend, "L1CaloTowers.pdf");
 
     canvas->Print("L1CaloTowers.pdf]");

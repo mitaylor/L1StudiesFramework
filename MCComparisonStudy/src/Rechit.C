@@ -156,14 +156,14 @@ int Compare(char const* oldInput, char const* newInput) {
     auto newCaloIHEHist = new TH1F("newCaloIHEHist", "", nbins*2, 0, 4000);
     auto newCaloIHFHist = new TH1F("newCaloIHFHist", "", nbins*2, 0, 5000);
 
-    auto oldCaloNTowersHistZoom = new TH1F("oldCaloNTowersHistZoom", "", nbins, 0, 550);
+    auto oldCaloNTowersHistZoom = new TH1F("oldCaloNTowersHistZoom", "", nbins, 0, 800);
     auto oldCaloIEtHistZoom = new TH1F("oldCaloIEtHistZoom", "", nbins, 0, 1500);
     auto oldCaloIEmHistZoom = new TH1F("oldCaloIEmHistZoom", "", nbins, 0, 600);
     auto oldCaloIHBHistZoom = new TH1F("oldCaloIHBHistZoom", "", nbins, 0, 200);
     auto oldCaloIHEHistZoom = new TH1F("oldCaloIHEHistZoom", "", nbins, 0, 400);
     auto oldCaloIHFHistZoom = new TH1F("oldCaloIHFHistZoom", "", nbins, 0, 500);
 
-    auto newCaloNTowersHistZoom = new TH1F("newCaloNTowersHistZoom", "", nbins, 0, 550);
+    auto newCaloNTowersHistZoom = new TH1F("newCaloNTowersHistZoom", "", nbins, 0, 800);
     auto newCaloIEtHistZoom = new TH1F("newCaloIEtHistZoom", "", nbins, 0, 1500);
     auto newCaloIEmHistZoom = new TH1F("newCaloIEmHistZoom", "", nbins, 0, 600);
     auto newCaloIHBHistZoom = new TH1F("newCaloIHBHistZoom", "", nbins, 0, 200);
