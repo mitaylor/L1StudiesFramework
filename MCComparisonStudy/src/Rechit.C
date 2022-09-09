@@ -170,13 +170,13 @@ int Compare(char const* oldInput, char const* newInput) {
     auto newCaloIHEHistZoom = new TH1F("newCaloIHEHistZoom", "", nbins, 0, 400);
     auto newCaloIHFHistZoom = new TH1F("newCaloIHFHistZoom", "", nbins, 0, 500);
 
-    auto oldCaloIEtEtaPhiHist = new TProfile2D("oldCaloIEtEtaPhiHist", "2018 Average Et", 84, -42, 42, 73, 0, 73);
-    auto oldCaloIEmEtaPhiHist = new TProfile2D("oldCaloIEmEtaPhiHist", "2018 Average Em", 84, -42, 42, 73, 0, 73);
-    auto oldCaloIHadEtaPhiHist = new TProfile2D("oldCaloIHadEtaPhiHist", "2018 Average Had", 84, -42, 42, 73, 0, 73);
+    auto oldCaloIEtEtaPhiHist = new TProfile2D("oldCaloIEtEtaPhiHist", "2018 Average Et", 84, -42, 42, 36, 0, 73);
+    auto oldCaloIEmEtaPhiHist = new TProfile2D("oldCaloIEmEtaPhiHist", "2018 Average Em", 84, -42, 42, 36, 0, 73);
+    auto oldCaloIHadEtaPhiHist = new TProfile2D("oldCaloIHadEtaPhiHist", "2018 Average Had", 84, -42, 42, 36, 0, 73);
 
-    auto newCaloIEtEtaPhiHist = new TProfile2D("newCaloIEtEtaPhiHist", "2022 Average Et", 84, -42, 42, 73, 0, 73);
-    auto newCaloIEmEtaPhiHist = new TProfile2D("newCaloIEmEtaPhiHist", "2022 Average Em", 84, -42, 42, 73, 0, 73);
-    auto newCaloIHadEtaPhiHist = new TProfile2D("newCaloIHadEtaPhiHist", "2022 Average Had", 84, -42, 42, 73, 0, 73);
+    auto newCaloIEtEtaPhiHist = new TProfile2D("newCaloIEtEtaPhiHist", "2022 Average Et", 84, -42, 42, 36, 0, 73);
+    auto newCaloIEmEtaPhiHist = new TProfile2D("newCaloIEmEtaPhiHist", "2022 Average Em", 84, -42, 42, 36, 0, 73);
+    auto newCaloIHadEtaPhiHist = new TProfile2D("newCaloIHadEtaPhiHist", "2022 Average Had", 84, -42, 42, 36, 0, 73);
 
     /* customize calo tower histogram draw options */
     auto legend = new TLegend(0.55, 0.75 ,0.85, 0.85);

@@ -34,8 +34,8 @@ void FormatHistogram(TH1F* hist, int color) {
 
 void PrintHist(TH1* hist1, TH1* hist2, string title, TCanvas* canvas, TLegend* legend, string filename) {
     hist1->GetXaxis()->SetTitle(title.c_str());
-    hist1->Draw("HIST LP");
-    hist2->Draw("HIST LP SAME");
+    hist1->Draw("HIST LPE");
+    hist2->Draw("HIST LPE SAME");
     legend->Draw();
 
     TLatex* newMean = new TLatex();
@@ -105,31 +105,31 @@ int Compare(char const* oldInput, char const* newInput) {
 
     /* define plots */
     vector<string> GenName = { 
-        "Gen Multiplicity", 
-        "Gen Pt",
-        "Gen PDG",
-        "Gen PDG",
-        "Gen Photon Pt",
-        "Gen Charged Particle Pt",
-        "Gen Charged Particle Eta",
+        "Gen Multiplicity"//, 
+        // "Gen Pt",
+        // "Gen PDG",
+        // "Gen PDG",
+        // "Gen Photon Pt",
+        // "Gen Charged Particle Pt",
+        // "Gen Charged Particle Eta",
         };
     vector<string> GenPlots = { 
-        "mult", 
-        "pt", 
-        "pdg",
-        "pdg",
-        "pt",
-        "pt",
-        "eta"
+        "mult"//, 
+        // "pt", 
+        // "pdg",
+        // "pdg",
+        // "pt",
+        // "pt",
+        // "eta"
         };
     vector<string> GenSel = {
-        "",
-        "",
-        "pdg < 350 && pdg > -350",
-        "pdg < 25 && pdg > -25",
-        "pdg == 22",
-        "chg != 0",
-        "chg != 0"
+        ""//,
+        // "",
+        // "pdg < 350 && pdg > -350",
+        // "pdg < 25 && pdg > -25",
+        // "pdg == 22",
+        // "chg != 0",
+        // "chg != 0"
     };
     vector<double> GenMax = { 22000, 60, 350, 25, 60, 60, 5.5 };
     vector<double> GenMin = { 0, 0, -350, -25, 0, 0, -5.5};
