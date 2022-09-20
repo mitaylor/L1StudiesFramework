@@ -9,12 +9,10 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --python_filename=${config}.py \
     -n 1 --no_output --era=${era} --mc --conditions=${globaltag} \
     --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulMCFromRAWSimHcalTP \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
-    --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2022_v0_4 \
+    --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2022_v0_4_1 \
     --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML \
     --filein=${filein}
 
 echo '
-process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
-process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
 process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 ' >> ${config}.py
