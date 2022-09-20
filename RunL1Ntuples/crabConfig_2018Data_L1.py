@@ -19,8 +19,8 @@ config.JobType.allowUndistributedCMSSW = True
 
 #### Data ####
 config.section_('Data')
-config.Data.inputDataset = '/HIForward/shuaiy-SkimedZeroBias_HIRun2018A_v1_RAW_run326776-94cbf4add1123a786b867f646bf0f0da/USER' # your dataset
-config.Data.inputDBS = 'phys03'
+config.Data.inputDataset = '/HIMinimumBias2/HIRun2018A-v1/RAW' # your dataset
+config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
 config.Data.publication = False

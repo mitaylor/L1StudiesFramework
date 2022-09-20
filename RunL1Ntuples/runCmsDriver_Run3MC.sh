@@ -2,7 +2,7 @@
 
 globaltag=124X_mcRun3_2022_realistic_HI_v10 # for Run 3 MC
 era=Run3_pp_on_PbPb # for running on Run 3
-filein='/store/user/mnguyen/Run3MC/QCDPhoton_pThat15_Run3_HydjetEmbedded/QCDPhoton_pThat15_Run3_HydjetEmbedded_DIGI/211126_120712/0000/step2_DIGI_L1_DIGI2RAW_HLT_PU_20.root' # replace with your test MC file
+filein='/store/himc/Run3Winter22PbPbNoMixDIGI/MinBias_Hydjet_Drum5F_5p02TeV/GEN-SIM-DIGI-RAW-HLTDEBUG/122X_mcRun3_2021_realistic_HI_v10-v3/2430000/31013444-6d03-489d-9b18-3e19d5675eec.root' # replace with your test MC file
 config=L1Ntuple_Run3MC; # cmsRun config file name
 
 cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --python_filename=${config}.py \

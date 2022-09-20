@@ -19,8 +19,8 @@ config.JobType.allowUndistributedCMSSW = True
 
 #### Data ####
 config.section_('Data')
-config.Data.inputDataset = '/QCDPhoton_pThat15_Run3_HydjetEmbedded/mnguyen-QCDPhoton_pThat15_Run3_HydjetEmbedded_DIGI-752b0cc9d22f4a7f20eccfe0d5df0682/USER' # your dataset
-config.Data.inputDBS = 'phys03'
+config.Data.inputDataset = '/MinBias_Hydjet_Drum5F_5p02TeV/Run3Winter22PbPbNoMixRECOMiniAOD-122X_mcRun3_2021_realistic_HI_v10-v3/MINIAODSIM' # your dataset
+config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
 config.Data.publication = False
