@@ -118,21 +118,21 @@ int Compare(char const* oldInput, char const* newInput) {
     FillChain(newJetChain, newFiles);
 
     /* define plots */
-    vector<string> EGPlots = { "nMC", "mcPt", "nEle", "elePt", "nPho", "phoEt" };
-    vector<double> EGMax = { 350, 60, 3, 60, 12, 60 };
-    vector<int> EGLog { 0, 1, 0, 0, 0, 0 };
+    vector<string> EGPlots = {}; // { "nMC", "mcPt", "nEle", "elePt", "nPho", "phoEt" };
+    vector<double> EGMax = {}; // { 350, 60, 3, 60, 12, 60 };
+    vector<int> EGLog {}; // { 0, 1, 0, 0, 0, 0 };
 
     vector<string> EvtPlots = { "hiHF", "hiET", "hiEE", "hiEB", "hiNpix" };
     vector<double> EvtMax = { 7000, 1200, 3000, 2500, 100000 };
     vector<int> EvtLog { 1, 0, 0, 0, 0 };
 
-    vector<string> GenPlots = { "mult", "pt" };
-    vector<double> GenMax = { 22000, 60 };
-    vector<int> GenLog { 0, 1 };
+    vector<string> GenPlots = {}; // { "mult", "pt" };
+    vector<double> GenMax = {}; // { 22000, 60 };
+    vector<int> GenLog = {}; // { 0, 1 };
 
-    vector<string> JetPlots = { "jtpt", "nref" };
-    vector<double> JetMax = { 150, 80 };
-    vector<int> JetLog { 1, 0 };
+    vector<string> JetPlots = {}; // { "jtpt", "nref" };
+    vector<double> JetMax = {}; // { 150, 80 };
+    vector<int> JetLog = {}; // { 1, 0 };
 
     /* create histograms for energy sum plots */
     int nbins = 100;
