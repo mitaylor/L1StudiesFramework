@@ -124,7 +124,7 @@ int Compare(char const* oldInput, char const* newInput) {
 
     vector<string> EvtPlots = { "hiHF", "hiET", "hiEE", "hiEB", "hiNpix" };
     vector<double> EvtMax = { 7000, 1200, 3000, 2500, 100000 };
-    vector<int> EvtLog { 0, 0, 0, 0, 0 };
+    vector<int> EvtLog { 1, 0, 0, 0, 0 };
 
     vector<string> GenPlots = { "mult", "pt" };
     vector<double> GenMax = { 22000, 60 };
