@@ -43,16 +43,16 @@ Edit runCmsDriver_2018Data.sh or runCmsDriver_Run3MC to change the test data fil
 **For processing Run 2 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_12_4_0/src
-cd CMSSW_12_4_0/src
+cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
 ./runCmsDriver_2018Data.py
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_12_4_0/src
-cd CMSSW_12_4_0/src
+cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
 ./runCmsDriver_Run3MC.py
 ```
 
@@ -90,15 +90,15 @@ cmsRun L1Ntuple_Run3MC.py
 Edit crabConfig_2018Data_L1.py or crabConfig_Run3MC_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_2018Data.py CMSSW_12_4_0/src
-cd CMSSW_12_4_0/src
+cp L1StudiesFramework/RunL1Ntuples/crabConfig_2018Data.py CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
 crab submit -c crabConfig_2018Data_L1.py
 ```
 
 or
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_12_4_0/src
-cd CMSSW_12_4_0/src
+cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
 crab submit -c crabConfig_Run3MC_L1.py
 ```
