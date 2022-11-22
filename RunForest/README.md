@@ -37,13 +37,17 @@ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L
 
 ### 3. Do a local test of cmsRun
 
+For the following instructions please alter the paths to reflect your own setup.
+
+**For processing 2018 data:**
+
 ```
 cp L1StudiesFramework/RunForest/forestL1_miniAOD_2018Data.py CMSSW_12_6_0_pre1/src
 cd CMSSW_12_6_0_pre1/src
 cmsRun forestL1_miniAOD_2018Data.py
 ```
 
-or
+**For processing Run 3 MC:**
 
 ```
 cp L1StudiesFramework/RunForest/forestL1_miniAOD_Run3MC.py CMSSW_12_6_0_pre1/src
@@ -55,13 +59,15 @@ cmsRun forestL1_miniAOD_Run3MC.py
 
 Edit crabConfig_2018Data_ForestL1.py or crabConfig_Run3MC_ForestL1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
+**For processing 2018 data:**
+
 ```
 cp L1StudiesFramework/RunForest/crabConfig_2018Data_ForestL1.py CMSSW_12_6_0_pre1/src
 cd CMSSW_12_6_0_pre1/src
 crab submit crabConfig_2018Data_ForestL1.py
 ```
 
-or
+**For processing Run 3 MC:**
 
 ```
 cp L1StudiesFramework/RunForest/crabConfig_Run3MC_ForestL1.py CMSSW_12_6_0_pre1/src

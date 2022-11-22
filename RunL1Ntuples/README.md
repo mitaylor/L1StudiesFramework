@@ -38,9 +38,7 @@ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L
 
 For the following instructions please alter the paths to reflect your own setup.
 
-Edit runCmsDriver_2018Data.sh or runCmsDriver_Run3MC to change the test data file or output config file name.
-
-**For processing Run 2 data:**
+**For processing 2018 data:**
 
 ```
 cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_12_6_0_pre1/src
@@ -54,6 +52,14 @@ cd CMSSW_12_6_0_pre1/src
 cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_12_6_0_pre1/src
 cd CMSSW_12_6_0_pre1/src
 ./runCmsDriver_Run3MC.py
+```
+
+**For processing 2022 data:**
+
+```
+cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2022Data.sh CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
+./runCmsDriver_2022Data.py
 ```
 
 ### 4. Add the Spike Killer settings
@@ -75,19 +81,29 @@ process.GlobalTag.toGet.extend = cms.VPSet(
 
 ### 5. Do a local test of cmsRun
 
+**For processing 2018 data:**
+
 ```
 cmsRun L1Ntuple_2018Data.py
 ```
 
-or
+**For processing Run 3 MC:**
 
 ```
 cmsRun L1Ntuple_Run3MC.py
 ```
 
+**For processing 2022 data:**
+
+```
+cmsRun L1Ntuple_2022Data.py
+```
+
 ### 6. Submit CRAB jobs
 
 Edit crabConfig_2018Data_L1.py or crabConfig_Run3MC_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+
+**For processing 2018 data:**
 
 ```
 cp L1StudiesFramework/RunL1Ntuples/crabConfig_2018Data.py CMSSW_12_6_0_pre1/src
@@ -95,10 +111,19 @@ cd CMSSW_12_6_0_pre1/src
 crab submit -c crabConfig_2018Data_L1.py
 ```
 
-or
+**For processing Run 3 MC:**
 
 ```
 cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_12_6_0_pre1/src
 cd CMSSW_12_6_0_pre1/src
 crab submit -c crabConfig_Run3MC_L1.py
 ```
+
+**For processing 2022 data:**
+
+```
+cp L1StudiesFramework/RunL1Ntuples/crabConfig_2022Data.py CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
+crab submit -c crabConfig_2022Data_L1.py
+```
+
