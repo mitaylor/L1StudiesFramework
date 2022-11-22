@@ -94,6 +94,16 @@ process.GlobalTag.toGet.extend([
          )
 ])
 
+process.GlobalTag.toGet.extend = cms.VPSet(
+   cms.PSet(record = cms.string('EcalTPGFineGrainStripEERcd'),
+            tag = cms.string('EcalTPGFineGrainStrip_7'),
+            connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+    ),
+    cms.PSet(record = cms.string('EcalTPGSpikeRcd'),
+        tag = cms.string('EcalTPGSpike_12'),
+        connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+    )
+)
 
 # Production Info                                                                                                                                                                                                                                        
 process.configurationMetadata = cms.untracked.PSet(
@@ -171,7 +181,7 @@ process.muonAnalyzer.doGen = cms.bool(True)
 # main forest sequence
 process.forest = cms.Path(
     process.HiForestInfo +
-    process.hltanalysis +
+    # process.hltanalysis +
     # process.hltobject +
     process.l1object +
     process.trackSequencePbPb +
@@ -271,10 +281,11 @@ from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU
 process = L1NtupleRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
-from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_4_1 
+from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_5 
 
-#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_4_1 imported from L1Trigger.Configuration.customiseSettings
-process = L1TSettingsToCaloParamsHI_2022_v0_4_1(process)
+#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_5 imported from L1Trigger.Configuration.customiseSettings
+process = L1TSettingsToCaloParamsHI_2022_v0_5(process)
+
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseUtils
 from L1Trigger.Configuration.customiseUtils import L1TGlobalMenuXML 

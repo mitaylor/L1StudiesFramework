@@ -18,12 +18,12 @@ process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 123X, data")
 # input files
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
-        fileNames = cms.untracked.vstring(
-            'file:/eos/cms/store/group/phys_heavyions/mitaylor/L1EmulatorTestFiles/ZeroBiasMiniAOD.root'
-            ),
-        secondaryFileNames = cms.untracked.vstring(
-            '/store/user/shuaiy/RiceHIN/L1Emulator/SkimedZeroBias_HIRun2018A_v1_RAW_run326776/HIForward/SkimedZeroBias_HIRun2018A_v1_RAW_run326776/201228_010151/0000/skimedZeroBias_1.root'
-            )
+    fileNames = cms.untracked.vstring(
+        'file:/eos/cms/store/group/phys_heavyions/mitaylor/L1EmulatorTestFiles/ZeroBiasMiniAOD.root'
+        ),
+    secondaryFileNames = cms.untracked.vstring(
+        '/store/user/shuaiy/RiceHIN/L1Emulator/SkimedZeroBias_HIRun2018A_v1_RAW_run326776/HIForward/SkimedZeroBias_HIRun2018A_v1_RAW_run326776/201228_010151/0000/skimedZeroBias_1.root'
+        )
     )
 
 # number of events to process, set to -1 to process all events
@@ -105,6 +105,17 @@ process.GlobalTag.toGet.extend([
         )
     ])
 
+process.GlobalTag.toGet.extend = cms.VPSet(
+   cms.PSet(record = cms.string('EcalTPGFineGrainStripEERcd'),
+            tag = cms.string('EcalTPGFineGrainStrip_7'),
+            connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+    ),
+    cms.PSet(record = cms.string('EcalTPGSpikeRcd'),
+        tag = cms.string('EcalTPGSpike_12'),
+        connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+    )
+)
+
 ###############################################################################
 
 # root output
@@ -171,7 +182,7 @@ process.zdcanalyzer.calZDCDigi = True
 # main forest sequence
 process.forest = cms.Path(
     process.HiForestInfo +
-    process.hltanalysis +
+    # process.hltanalysis +
     process.hltobject +
     process.l1object +
     process.trackSequencePbPb +

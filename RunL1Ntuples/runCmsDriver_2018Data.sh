@@ -1,6 +1,6 @@
 #!/bin/bash
 
-globaltag=124X_dataRun2_PromptLike_HI_v1 # for Run 2 data reprocessing
+globaltag=auto:run2_data_promptlike_hi # for Run 2 data reprocessing
 era=Run2_2018_pp_on_AA # for Run 2
 filein='file:/eos/cms/store/group/phys_heavyions/mitaylor/L1EmulatorTestFiles/MinimumBias_Run326295.root' # change to desired test file
 config=L1Ntuple_Data2018; # cmsRun config file name
@@ -17,6 +17,14 @@ echo '
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
 process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
+
+process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
+    digiLabel = cms.untracked.InputTag("hcalDigis"),
+    minimized = cms.untracked.bool(True)
+)
+
+process.HFAdc = cms.Path(process.HFAdcana)
+process.schedule.append(process.HFAdc)
 
 MassReplaceInputTag(process, new="rawDataMapperByLabel", old="rawDataCollector")
 ' >> ${config}.py
