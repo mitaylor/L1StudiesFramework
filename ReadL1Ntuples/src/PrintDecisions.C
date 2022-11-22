@@ -9,6 +9,7 @@ Input:  L1Ntuple made with one of the following menu versions
     L1Menu_CollisionsHeavyIons2022_v0_0_5.xml --> Menu::Y2022_V0_0_5
     L1Menu_CollisionsHeavyIons2022_v1_0_0.xml --> Menu::Y2022_V1_0_0
     L1Menu_CollisionsHeavyIons2022_v1_0_1.xml --> Menu::Y2022_V1_0_1
+    L1Menu_CollisionsHeavyIons2022_v1_1_0.xml --> Menu::Y2022_V1_1_0
 Output: A list of how many times each menu trigger was passed
 Note: If you are using your own custom menu, add it to Menu.h following the instructions in data/README
 */
@@ -28,7 +29,7 @@ using namespace std;
 
 int Print(char const* input) {
     /* initilaize menu */
-    Menu menu(Menu::Y2022_V1_0_1);
+    Menu menu(Menu::Y2022_V1_1_0);
 
     /* file, trees, and branches */
     TFile* inFile = new TFile(input, "read");
