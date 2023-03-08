@@ -3,22 +3,21 @@
 globaltag=124X_dataRun3_Prompt_v10 # latest GT from https://twiki.cern.ch/twiki/bin/view/CMS/LatestOnlineGTs
 era=Run3_pp_on_PbPb # for Run 2
 filein='/store/hidata/HIRun2022A/HITestRaw1/RAW/v1/000/362/219/00000/fabf58d4-c2e8-4275-a868-fbc8eb3436b1.root'
-config=L1Ntuple_Data2022; # cmsRun config file name
+config=L1Ntuple_Data2022_MB; # cmsRun config file name
 
 cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --repacked --python_filename=${config}.py \
     -n 1000 --no_output --era=${era} --data --conditions=${globaltag} \
-    --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimHcalTP \
+    --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
     --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2022_v0_5 \
     --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML \
     --filein=${filein}
 
 echo '
-process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
-
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
+    minimized = cms.untracked.bool(True),
+    fillhf = cms.bool(True)
 )
 
 process.HFAdc = cms.Path(process.HFAdcana)
@@ -26,7 +25,8 @@ process.schedule.append(process.HFAdc)
 
 process.Trigger = cms.EDFilter( "TriggerResultsFilter",
       triggerConditions = cms.vstring(
-         "HLT_HIZeroBias_v*" # change to whichever path you want to select, like HLT_HIMinimumBias_v*
+        # "HLT_HIZeroBias_v*",                                                                                                                                                                                  
+        "HLT_HIMinimumBias_v*"
          ),
       hltResults = cms.InputTag( "TriggerResults", "", "HLT" ),
       l1tResults = cms.InputTag( "gtStage2Digis" ),

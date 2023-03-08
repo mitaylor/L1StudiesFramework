@@ -1,6 +1,8 @@
 ## Instructions to run the L1Emulator + HIForest with the Run 3 HI menu using CMSSW_12_6_0_pre1
 
-These instructions are for running the L1Ntuples with the offline information included.
+These instructions are for running the L1Ntuples with the offline information included. 
+
+These configs do not enable resimulating HCal TPs, which means that the Minimum Bias trigger thresholds will not be altered from when the data was taken or the MC was generated. If you would like to change the MB thresholds, contact me and I will tell you which lines to alter in the cmsRun configs (currently they are commented out).
 
 ### 1. Set up the emulator and the HIForest code
 
@@ -55,9 +57,18 @@ cd CMSSW_12_6_0_pre1/src
 cmsRun forestL1_miniAOD_Run3MC.py
 ```
 
+**For processing 2022 data:**
+
+```cp L1StudiesFramework/RunForest/forestL1_miniAOD_Run3MC.py CMSSW_12_6_0_pre1/src
+cp L1StudiesFramework/RunForest/forestL1_miniAOD_2022Data_*.py CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
+cmsRun forestL1_miniAOD_2022Data_MB.py
+cmsRun forestL1_miniAOD_2022Data_ZB.py
+```
+
 ### 4. Submit CRAB jobs
 
-Edit crabConfig_2018Data_ForestL1.py or crabConfig_Run3MC_ForestL1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+Edit crabConfig_2018Data_ForestL1.py, crabConfig_Run3MC_ForestL1.py, or crabConfig_2022Data_ForestL1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
 **For processing 2018 data:**
 
@@ -74,3 +85,12 @@ cp L1StudiesFramework/RunForest/crabConfig_Run3MC_ForestL1.py CMSSW_12_6_0_pre1/
 cd CMSSW_12_6_0_pre1/src
 crab submit -c crabConfig_Run3MC_ForestL1.py
 ```
+
+**For processing 2022 data:**
+
+```
+cp L1StudiesFramework/RunForest/crabConfig_2022Data_ForestL1.py CMSSW_12_6_0_pre1/src
+cd CMSSW_12_6_0_pre1/src
+crab submit crabConfig_2022Data_ForestL1.py
+```
+

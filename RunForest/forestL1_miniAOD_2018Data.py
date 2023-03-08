@@ -277,10 +277,12 @@ from Configuration.Applications.ConfigBuilder import MassReplaceInputTag
 # customisation of the process.
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP 
+# from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW 
 
 #call to customisation function L1TReEmulFromRAW imported from L1Trigger.Configuration.customiseReEmul
-process = L1TReEmulFromRAWsimHcalTP(process)
+# process = L1TReEmulFromRAWsimHcalTP(process)
+process = L1TReEmulFromRAW(process)
 
 # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple
 from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU 
@@ -312,11 +314,12 @@ process = customiseEarlyDelete(process)
 
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
-process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
+# process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
+    minimized = cms.untracked.bool(True),
+    fillhf = cms.bool(False)
 )
 
 process.HFAdc = cms.Path(process.HFAdcana)

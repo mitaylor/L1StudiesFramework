@@ -269,10 +269,12 @@ associatePatAlgosToolsTask(process)
 # customisation of the process.
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP 
+# from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP 
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAW
 
 #call to customisation function L1TReEmulMCFromRAW imported from L1Trigger.Configuration.customiseReEmul
-process = L1TReEmulMCFromRAWSimHcalTP(process)
+# process = L1TReEmulMCFromRAWSimHcalTP(process)
+process = L1TReEmulMCFromRAW(process)
 
 # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple
 from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU 
@@ -303,11 +305,12 @@ from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEar
 process = customiseEarlyDelete(process)
 # End adding early deletion
 
-process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
+# process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
+    minimized = cms.untracked.bool(True),
+    fillhf = cms.bool(False)
 )
 
 process.HFAdc = cms.Path(process.HFAdcana)

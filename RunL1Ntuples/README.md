@@ -2,6 +2,8 @@
 
 These instructions are for creating only the L1Ntuples without the offline information included.
 
+These configs do not enable resimulating HCal TPs, which means that the Minimum Bias trigger thresholds will not be altered from when the data was taken or the MC was generated. If you would like to change the MB thresholds, contact me and I will tell you which lines to alter in the cmsRun configs.
+
 ### 1. Set up the emulator
 
 ```
@@ -57,9 +59,10 @@ cd CMSSW_12_6_0_pre1/src
 **For processing 2022 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2022Data.sh CMSSW_12_6_0_pre1/src
+cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2022Data_*.sh CMSSW_12_6_0_pre1/src
 cd CMSSW_12_6_0_pre1/src
-./runCmsDriver_2022Data.py
+./runCmsDriver_2022Data_MB.py
+./runCmsDriver_2022Data_ZB.py
 ```
 
 ### 4. Add the Spike Killer settings
@@ -96,12 +99,13 @@ cmsRun L1Ntuple_Run3MC.py
 **For processing 2022 data:**
 
 ```
-cmsRun L1Ntuple_2022Data.py
+cmsRun L1Ntuple_2022Data_MB.py
+cmsRun L1Ntuple_2022Data_ZB.py
 ```
 
 ### 6. Submit CRAB jobs
 
-Edit crabConfig_2018Data_L1.py or crabConfig_Run3MC_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+Edit crabConfig_2018Data_L1.py, crabConfig_Run3MC_L1.py, or crabConfig_2022Data_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
 **For processing 2018 data:**
 

@@ -1,5 +1,5 @@
-OutputBase = "" # your storage area
-Tag="" # your job name
+OutputBase = '' # your storage area
+Tag = '' # your job name
 
 from WMCore.Configuration import Configuration
 config = Configuration()

@@ -7,7 +7,7 @@ config=L1Ntuple_Run3MC; # cmsRun config file name
 
 cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --python_filename=${config}.py \
     -n 1 --no_output --era=${era} --mc --conditions=${globaltag} \
-    --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulMCFromRAWSimHcalTP \
+    --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulMCFromRAW \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
     --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2022_v0_5 \
     --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML \
@@ -17,11 +17,10 @@ echo '
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
+    minimized = cms.untracked.bool(True),
+    fillhf = cms.bool(False)
 )
 
 process.HFAdc = cms.Path(process.HFAdcana)
 process.schedule.append(process.HFAdc)
-
-process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 ' >> ${config}.py

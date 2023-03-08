@@ -13,7 +13,7 @@ config.General.transferLogs = True
 #### JobType ####
 config.section_('JobType')
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = 'L1Ntuple_Data2022.py'
+config.JobType.psetName = 'L1Ntuple_Data2022_MB.py' # or 'L1Ntuple_Data2022_ZB.py'
 config.JobType.maxMemoryMB = 2000
 config.JobType.allowUndistributedCMSSW = True
 
