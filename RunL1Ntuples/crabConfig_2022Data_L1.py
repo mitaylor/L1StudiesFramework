@@ -27,8 +27,7 @@ config.Data.publication = False
 config.Data.outLFNDirBase = OutputBase
 config.Data.outputDatasetTag = Tag
 config.Data.allowNonValidInputDataset = True
-config.Data.runRange = '362321' # this is a good run, included since lumiMask is not available yet
-# config.Data.lumiMask = '' # not available yet
+config.Data.lumiMask = '/eos/user/c/cmsdqm/www/CAF/certification/Collisions22/Collisions2022HISpecial/Cert_Collisions2022HISpecial_362293_362323_Golden.json'
 
 #### Site ####
 config.section_('Site')
