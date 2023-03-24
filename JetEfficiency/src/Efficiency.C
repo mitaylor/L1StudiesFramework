@@ -105,7 +105,7 @@ int Efficiency(char const* input) {
     float threshold = 64;
 
     /* create histograms for efficiency plots */
-    int nbins = 100;
+    int nbins = 25;
     float min = 0;
     float max = 200;
 
