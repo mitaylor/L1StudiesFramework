@@ -132,8 +132,8 @@ int Efficiency(char const* input) {
 
             if ((*caloJetPt)[i] > caloMaxJetPt) {
                 caloMaxJetPt = (*caloJetPt)[i];
-                caloMaxJetPhi = (*caloJetEta)[i];
-                caloMaxJetEta = (*caloJetPhi)[i];
+                caloMaxJetEta = (*caloJetEta)[i];
+                caloMaxJetPhi = (*caloJetPhi)[i];
             }
         }
 
@@ -146,8 +146,8 @@ int Efficiency(char const* input) {
                     emuMaxJetPt = (*emuJetPt)[i];
                 }
 
-                if (dr((*emuJetEta)[i], (*emuJetPhi)[i], caloMaxJetPhi, caloMaxJetEta) < minDR) {
-                    minDR = dr((*emuJetEta)[i], (*emuJetPhi)[i], caloMaxJetPhi, caloMaxJetEta);
+                if (dr((*emuJetEta)[i], (*emuJetPhi)[i], caloMaxJetEta, caloMaxJetPhi) < minDR) {
+                    minDR = dr((*emuJetEta)[i], (*emuJetPhi)[i], caloMaxJetEta, caloMaxJetPhi);
                     emuMatchedJetPt = (*emuJetPt)[i];
                 }
             }

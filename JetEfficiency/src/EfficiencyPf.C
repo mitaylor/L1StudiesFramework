@@ -133,8 +133,8 @@ int Efficiency(char const* input) {
 
             if (jetPt[i] > maxJetPt) {
                 maxJetPt = jetPt[i];
-                maxJetPhi = jetEta[i];
-                maxJetEta = jetPhi[i];
+                maxJetEta = jetEta[i];
+                maxJetPhi = jetPhi[i];
             }
         }
 
@@ -147,8 +147,8 @@ int Efficiency(char const* input) {
                     emuMaxJetPt = (*emuJetPt)[i];
                 }
 
-                if (dr((*emuJetEta)[i], (*emuJetPhi)[i], maxJetPhi, maxJetEta) < minDR) {
-                    minDR = dr((*emuJetEta)[i], (*emuJetPhi)[i], maxJetPhi, maxJetEta);
+                if (dr((*emuJetEta)[i], (*emuJetPhi)[i], maxJetEta, maxJetPhi) < minDR) {
+                    minDR = dr((*emuJetEta)[i], (*emuJetPhi)[i], maxJetEta, maxJetPhi);
                     emuMatchedJetPt = (*emuJetPt)[i];
                 }
             }
