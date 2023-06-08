@@ -10,7 +10,7 @@ process = cms.Process('HiForest', Run3_pp_on_PbPb)
 
 # HiForest info
 process.load("HeavyIonsAnalysis.EventAnalysis.HiForestInfo_cfi")
-process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 123X, mc")
+process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 131X, mc")
 
 ###############################################################################
 
@@ -84,7 +84,7 @@ process.options = cms.untracked.PSet(
 )
 
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2022_realistic_hi', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2023_realistic_hi', '')
 process.HiForestInfo.GlobalTagLabel = process.GlobalTag.globaltag
 process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
 process.GlobalTag.toGet.extend([
@@ -283,10 +283,10 @@ from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU
 process = L1NtupleRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
-from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_5 
+from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_6 
 
-#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_5 imported from L1Trigger.Configuration.customiseSettings
-process = L1TSettingsToCaloParamsHI_2022_v0_5(process)
+#call to customisation function L1TSettingsToCaloParamsHI_2022_v0_6 imported from L1Trigger.Configuration.customiseSettings
+process = L1TSettingsToCaloParamsHI_2022_v0_6(process)
 
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseUtils

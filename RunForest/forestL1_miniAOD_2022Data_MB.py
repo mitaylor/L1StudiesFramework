@@ -10,7 +10,7 @@ process = cms.Process('HiForest',Run3_pp_on_PbPb)
 
 # HiForest info
 process.load("HeavyIonsAnalysis.EventAnalysis.HiForestInfo_cfi")
-process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 125X, data")
+process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 131X, data")
 
 ###############################################################################
 
@@ -86,7 +86,7 @@ process.options = cms.untracked.PSet(
 ###############################################################################
 
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '125X_dataRun3_relval_v4', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '130X_dataRun3_Prompt_v3', '')
 process.HiForestInfo.GlobalTagLabel = process.GlobalTag.globaltag
 
 # Set spike killer settings for emulation
@@ -195,10 +195,10 @@ from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU
 process = L1NtupleRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
-from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_5 
+from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2022_v0_6 
 
-# Call to customisation function L1TSettingsToCaloParamsHI_2022_v0_5 imported from L1Trigger.Configuration.customiseSettings
-process = L1TSettingsToCaloParamsHI_2022_v0_5(process)
+# Call to customisation function L1TSettingsToCaloParamsHI_2022_v0_6 imported from L1Trigger.Configuration.customiseSettings
+process = L1TSettingsToCaloParamsHI_2022_v0_6(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseUtils
 from L1Trigger.Configuration.customiseUtils import L1TGlobalMenuXML 
