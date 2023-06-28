@@ -28,7 +28,7 @@ process.source = cms.Source("PoolSource",
 
 # Number of events to process, set to -1 to process all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(1000)
     )
 
 ###############################################################################
@@ -147,7 +147,7 @@ process.TFileService = cms.Service("TFileService",
 
 # Selection of at least a two-track fitted vertex                                                                                                                                                                     
 process.primaryVertexFilterHI = cms.EDFilter("VertexSelector",
-    src = cms.InputTag("offlineSlimmedPrimaryVerticesRecovery"),
+    src = cms.InputTag("offlineSlimmedPrimaryVertices"),
     cut = cms.string("!isFake && abs(z) <= 25 && position.Rho <= 2"), #in miniADO trackSize()==0, however there is no influence.                                                                                      
     filter = cms.bool(True), # otherwise it won't filter the events                                                                                                                                                   
 )
@@ -210,11 +210,6 @@ process = L1TGlobalMenuXML(process)
 
 # Addictional customization
 # process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
-
-process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
-    digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
-)
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),

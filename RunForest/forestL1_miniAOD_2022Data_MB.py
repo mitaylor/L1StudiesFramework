@@ -147,7 +147,7 @@ process.TFileService = cms.Service("TFileService",
 
 # Selection of at least a two-track fitted vertex                                                                                                                                                                     
 process.primaryVertexFilterHI = cms.EDFilter("VertexSelector",
-    src = cms.InputTag("offlineSlimmedPrimaryVerticesRecovery"),
+    src = cms.InputTag("offlineSlimmedPrimaryVertices"),
     cut = cms.string("!isFake && abs(z) <= 25 && position.Rho <= 2"), #in miniADO trackSize()==0, however there is no influence.                                                                                      
     filter = cms.bool(True), # otherwise it won't filter the events                                                                                                                                                   
 )
@@ -213,11 +213,6 @@ process = L1TGlobalMenuXML(process)
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),
-    minimized = cms.untracked.bool(True)
-)
-
-process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
-    digiLabel = cms.untracked.InputTag("hcalDigis"),
     minimized = cms.untracked.bool(True),
     fillhf = cms.bool(True)
 )
@@ -234,7 +229,7 @@ process.hltfilter = hltHighLevel.clone(
     ]
 )
 process.filterSequence = cms.Sequence(
-    process.hltfilter
+    process.hltfilter*process.primaryVertexFilter*process.clusterCompatibilityFilter
 )
 
 process.superFilterPath = cms.Path(process.filterSequence)
