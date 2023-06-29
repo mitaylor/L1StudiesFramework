@@ -278,7 +278,7 @@ from Configuration.Applications.ConfigBuilder import MassReplaceInputTag
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
 # from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW 
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW
 
 #call to customisation function L1TReEmulFromRAW imported from L1Trigger.Configuration.customiseReEmul
 # process = L1TReEmulFromRAWsimHcalTP(process)

@@ -13,7 +13,7 @@ cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
 git fetch cms-l1t-offline l1t-integration-CMSSW_13_1_0_pre4
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v156
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v161
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 svn export https://github.com/boundino/HltL1Run2021.git/trunk/L1/ADC
 
