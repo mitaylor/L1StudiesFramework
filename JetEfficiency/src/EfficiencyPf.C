@@ -1,16 +1,7 @@
 /*
-Input:  L1Ntuple made with one of the following menu versions
-    L1Menu_CollisionsHeavyIons2018_v4_2_0.xml --> Menu::Y2018_V4_2_0
-    L1Menu_CollisionsHeavyIons2022_v0_0_0.xml --> Menu::Y2022_V0_0_0
-    L1Menu_CollisionsHeavyIons2022_v0_0_1.xml --> Menu::Y2022_V0_0_1
-    L1Menu_CollisionsHeavyIons2022_v0_0_2.xml --> Menu::Y2022_V0_0_2
-    L1Menu_CollisionsHeavyIons2022_v0_0_3.xml --> Menu::Y2022_V0_0_3
-    L1Menu_CollisionsHeavyIons2022_v0_0_4.xml --> Menu::Y2022_V0_0_4
-Output: A list of how many times each menu trigger was passed
-Note: If you are using your own custom menu, add it to Menu.h following the instructions in data/README
+Input: Folder of L1Ntuples
+Output: A plot of the jet turn-ons with and with out L1 dR matching vs PF jet pT
 */
-
-#include "../include/Menu.h"
 
 #include "TFile.h"
 #include "TTreeReader.h"
@@ -74,9 +65,7 @@ void FillChain(TChain& chain, vector<string>& files) {
 }
 
 int Efficiency(char const* input) {
-    /* initilaize menu */
-    Menu menu(Menu::Y2022_V1_1_0);
-
+    /* read in all files in the input folder */
     vector<string> files;
     GetFiles(input, files);
 
