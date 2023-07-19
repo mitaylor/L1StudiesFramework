@@ -43,7 +43,7 @@ For the following instructions please alter the paths to reflect your own setup.
 **For processing 2018 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2018Data.sh CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_2018Data.sh CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 ./runCmsDriver_2018Data.py
 ```
@@ -51,7 +51,7 @@ cd CMSSW_13_1_0_pre4/src
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 ./runCmsDriver_Run3MC.py
 ```
@@ -59,7 +59,7 @@ cd CMSSW_13_1_0_pre4/src
 **For processing 2022 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/runCmsDriver_2022Data_*.sh CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_2022Data_*.sh CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 ./runCmsDriver_2022Data_MB.py
 ./runCmsDriver_2022Data_ZB.py
@@ -110,7 +110,7 @@ Edit crabConfig_2018Data_L1.py, crabConfig_Run3MC_L1.py, or crabConfig_2022Data_
 **For processing 2018 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_2018Data.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_2018Data.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 crab submit -c crabConfig_2018Data_L1.py
 ```
@@ -118,7 +118,7 @@ crab submit -c crabConfig_2018Data_L1.py
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_Run3MC.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_Run3MC.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 crab submit -c crabConfig_Run3MC_L1.py
 ```
@@ -126,7 +126,7 @@ crab submit -c crabConfig_Run3MC_L1.py
 **For processing 2022 data:**
 
 ```
-cp L1StudiesFramework/RunL1Ntuples/crabConfig_2022Data.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_2022Data.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 crab submit -c crabConfig_2022Data_L1.py
 ```

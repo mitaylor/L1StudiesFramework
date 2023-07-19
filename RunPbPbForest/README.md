@@ -45,7 +45,7 @@ For the following instructions please alter the paths to reflect your own setup.
 **For processing 2018 data:**
 
 ```
-cp L1StudiesFramework/RunForest/forestL1_miniAOD_2018Data.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbForest/forestL1_miniAOD_2018Data.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 cmsRun forestL1_miniAOD_2018Data.py
 ```
@@ -53,7 +53,7 @@ cmsRun forestL1_miniAOD_2018Data.py
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunForest/forestL1_miniAOD_Run3MC.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbForest/forestL1_miniAOD_Run3MC.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 cmsRun forestL1_miniAOD_Run3MC.py
 ```
@@ -61,7 +61,7 @@ cmsRun forestL1_miniAOD_Run3MC.py
 **For processing 2022 data:**
 
 ```cp L1StudiesFramework/RunForest/forestL1_miniAOD_Run3MC.py CMSSW_12_6_0_pre1/src
-cp L1StudiesFramework/RunForest/forestL1_miniAOD_2022Data_*.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbForest/forestL1_miniAOD_2022Data_*.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 cmsRun forestL1_miniAOD_2022Data_MB.py
 cmsRun forestL1_miniAOD_2022Data_ZB.py
@@ -74,7 +74,7 @@ Edit crabConfig_2018Data_ForestL1.py, crabConfig_Run3MC_ForestL1.py, or crabConf
 **For processing 2018 data:**
 
 ```
-cp L1StudiesFramework/RunForest/crabConfig_2018Data_ForestL1.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbForest/crabConfig_2018Data_ForestL1.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 crab submit crabConfig_2018Data_ForestL1.py
 ```
@@ -82,7 +82,7 @@ crab submit crabConfig_2018Data_ForestL1.py
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunForest/crabConfig_Run3MC_ForestL1.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbForest/crabConfig_Run3MC_ForestL1.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 crab submit -c crabConfig_Run3MC_ForestL1.py
 ```
@@ -90,7 +90,7 @@ crab submit -c crabConfig_Run3MC_ForestL1.py
 **For processing 2022 data:**
 
 ```
-cp L1StudiesFramework/RunForest/crabConfig_2022Data_ForestL1.py CMSSW_13_1_0_pre4/src
+cp L1StudiesFramework/RunPbPbForest/crabConfig_2022Data_ForestL1.py CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
 crab submit crabConfig_2022Data_ForestL1.py
 ```
