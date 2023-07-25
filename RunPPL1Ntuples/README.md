@@ -1,6 +1,6 @@
 ## Instructions to run the L1Emulator with the Run 3 PP reference menu using CMSSW_13_2_0_pre1
 
-These instructions are for running the L1Ntuples with the offline information included. 
+These instructions are for running the L1Ntuples with the offline information included. They can be used to run on 2017 data or on 2023 MC, but in order to process 2017 MC please use the instructions on the Twiki.
 
 These configs do not enable resimulating HCal TPs, which means that the Minimum Bias trigger thresholds will not be altered from when the data was taken or the MC was generated. If you would like to change the MB thresholds, contact me and I will tell you which lines to alter in the cmsRun configs.
 
@@ -40,6 +40,14 @@ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L
 
 For the following instructions please alter the paths to reflect your own setup.
 
+**For processing 2017 data:**
+
+```
+cp L1StudiesFramework/RunPPL1Ntuples/l1Ntuple_AOD_2017Data.py CMSSW_13_2_0_pre1/src
+cd CMSSW_13_2_0_pre1/src
+cmsRun l1Ntuple_AOD_2017Data.py
+```
+
 **For processing Run 3 MC:**
 
 ```
@@ -50,7 +58,15 @@ cmsRun l1Ntuple_AOD_2023MC.py
 
 ### 4. Submit CRAB jobs
 
-Edit crabConfig_Run3MC_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+Edit crabConfig_Run3MC_L1.py or crabConfig_2017Data_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+
+**For processing 2018 data:**
+
+```
+cp L1StudiesFramework/RunPPL1Ntuples/crabConfig_2017Data_L1.py CMSSW_13_2_0_pre1/src
+cd CMSSW_13_2_0_pre1/src
+crab submit -c crabConfig_2017Data_L1.py
+```
 
 **For processing Run 3 MC:**
 
