@@ -13,7 +13,7 @@ config.General.transferLogs = True
 #### JobType ####
 config.section_('JobType')
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = 'l1Ntuple_AOD_2023MC.py'
+config.JobType.psetName = 'l1Ntuple_AOD_Run3MC.py'
 config.JobType.maxMemoryMB = 2000
 config.JobType.allowUndistributedCMSSW = True
 

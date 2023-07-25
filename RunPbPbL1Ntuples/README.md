@@ -87,20 +87,20 @@ process.GlobalTag.toGet.extend = cms.VPSet(
 **For processing 2018 data:**
 
 ```
-cmsRun L1Ntuple_2018Data.py
+cmsRun l1Ntuple_2018Data.py
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cmsRun L1Ntuple_Run3MC.py
+cmsRun l1Ntuple_Run3MC.py
 ```
 
 **For processing 2022 data:**
 
 ```
-cmsRun L1Ntuple_2022Data_MB.py
-cmsRun L1Ntuple_2022Data_ZB.py
+cmsRun l1Ntuple_2022Data_MB.py
+cmsRun l1Ntuple_2022Data_ZB.py
 ```
 
 ### 6. Submit CRAB jobs
