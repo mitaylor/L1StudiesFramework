@@ -29,12 +29,12 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2023_v0_0_1.xml
+wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2023_v0_0_2.xml
 cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2023_v0_0_1.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2023_v0_0_2.xml')
 
 ### 3. Run cmsDriver.py script
 
@@ -87,20 +87,20 @@ process.GlobalTag.toGet.extend = cms.VPSet(
 **For processing 2018 data:**
 
 ```
-cmsRun L1Ntuple_2018Data.py
+cmsRun l1Ntuple_2018Data.py
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cmsRun L1Ntuple_Run3MC.py
+cmsRun l1Ntuple_Run3MC.py
 ```
 
 **For processing 2022 data:**
 
 ```
-cmsRun L1Ntuple_2022Data_MB.py
-cmsRun L1Ntuple_2022Data_ZB.py
+cmsRun l1Ntuple_2022Data_MB.py
+cmsRun l1Ntuple_2022Data_ZB.py
 ```
 
 ### 6. Submit CRAB jobs

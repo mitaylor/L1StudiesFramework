@@ -13,7 +13,7 @@ config.General.transferLogs = True
 #### JobType ####
 config.section_('JobType')
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = 'L1Ntuple_Run3MC.py'
+config.JobType.psetName = 'l1Ntuple_Run3MC.py'
 config.JobType.maxMemoryMB = 2000
 config.JobType.allowUndistributedCMSSW = True
 

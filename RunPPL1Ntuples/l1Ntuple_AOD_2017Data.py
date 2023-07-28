@@ -2,34 +2,33 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: l1Ntuple -s RAW2DIGI --no_exec --python_filename=l1Ntuple_PP_2023MC.py -n 10000 --no_output --era=Run3 --mc --conditions=131X_mcRun3_2023_realistic_v6 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleAODRAWEMU --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2023_v0_3 --filein=/store/group/phys_heavyions/dileptons/junseok/RECO_AOD_MC_MB_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v3/MB_TuneCP5_5p36TeV_ppref_NOTPU-pythia8/RECO_AOD_MC_MB_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v3/230713_004450/0000/step3_RAW2DIGI_L1Reco_RECO_RECOSIM_PAT_1.root --secondfilein=/store/group/phys_heavyions/dileptons/junseok/DIGIRAW_MC_MBPU_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v1/MB_TuneCP5_5p36TeV_ppref_NOTPU-pythia8/DIGIRAW_MC_MBPU_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v1/230712_062651/0000/JME-RunIIAutumn18DR-00003_step1_1.root
+# with command line options: l1Ntuple -s RAW2DIGI --no_exec --python_filename=L1Ntuple_2017PPData.py -n 1000 --no_output --era=Run2_2017_ppRef --data --conditions=124X_dataRun2_v2 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleAODRAWEMU --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_4_ppRef --filein=/store/data/Run2017G/ZeroBias/AOD/17Nov2017-v1/100000/0A2DF9D9-4124-E811-A325-B499BAABF1D6.root --secondfilein=/store/data/Run2017G/ZeroBias/RAW/v1/000/306/709/00000/D625424F-09CB-E711-B045-02163E01A484.root
 import FWCore.ParameterSet.Config as cms
 
-from Configuration.Eras.Era_Run3_cff import Run3
+from Configuration.Eras.Era_Run2_2017_ppRef_cff import Run2_2017_ppRef
 
-process = cms.Process('RAW2DIGI',Run3)
+process = cms.Process('RAW2DIGI',Run2_2017_ppRef)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
-process.load('SimGeneral.MixingModule.mixNoPU_cfi')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_cff')
-process.load('Configuration.StandardSequences.RawToDigi_cff')
+process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10000),
+    input = cms.untracked.int32(1000),
     output = cms.optional.untracked.allowed(cms.int32,cms.PSet)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/group/phys_heavyions/dileptons/junseok/RECO_AOD_MC_MB_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v3/MB_TuneCP5_5p36TeV_ppref_NOTPU-pythia8/RECO_AOD_MC_MB_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v3/230713_004450/0000/step3_RAW2DIGI_L1Reco_RECO_RECOSIM_PAT_1.root'),
-    secondaryFileNames = cms.untracked.vstring('/store/group/phys_heavyions/dileptons/junseok/DIGIRAW_MC_MBPU_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v1/MB_TuneCP5_5p36TeV_ppref_NOTPU-pythia8/DIGIRAW_MC_MBPU_forPPRef_CMSSW_13_2_0_pre1_12Jul2023_v1/230712_062651/0000/JME-RunIIAutumn18DR-00003_step1_1.root')
+    fileNames = cms.untracked.vstring('/store/data/Run2017G/ZeroBias/AOD/17Nov2017-v1/100000/0A2DF9D9-4124-E811-A325-B499BAABF1D6.root'),
+    secondaryFileNames = cms.untracked.vstring('/store/data/Run2017G/ZeroBias/RAW/v1/000/306/709/00000/D625424F-09CB-E711-B045-02163E01A484.root')
 )
 
 process.options = cms.untracked.PSet(
@@ -66,7 +65,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('l1Ntuple nevts:10000'),
+    annotation = cms.untracked.string('l1Ntuple nevts:1000'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -77,7 +76,7 @@ process.configurationMetadata = cms.untracked.PSet(
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2023_realistic', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '124X_dataRun2_v2', '')
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
@@ -103,10 +102,10 @@ from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleAODRAWEMU
 process = L1NtupleAODRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
-from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParamsHI_2023_v0_3 
+from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloStage2Params_2017_v1_8_4_ppRef 
 
-#call to customisation function L1TSettingsToCaloParamsHI_2023_v0_3 imported from L1Trigger.Configuration.customiseSettings
-process = L1TSettingsToCaloParamsHI_2023_v0_3(process)
+#call to customisation function L1TSettingsToCaloStage2Params_2017_v1_8_4_ppRef imported from L1Trigger.Configuration.customiseSettings
+process = L1TSettingsToCaloStage2Params_2017_v1_8_4_ppRef(process)
 
 # End of customisation functions
 
