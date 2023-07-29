@@ -64,8 +64,8 @@ void FillChain(TChain& chain, vector<string>& files) {
     }
 }
 
-int UPCdijets(char const* input="/eos/user/g/ginnocen/CMSRun3/ZeroBias_HIRun2018A_MiniAOD_Run326776_131X_HF_14_19_v1/230701_025938/0000/",
-	      bool doZDCOr=true, float ZDC_1nthreshold=2000) {
+int UPCdijets(char const* input="L1NtupleUPCtest.root",
+	      bool doZDCOr=false, float ZDC_1nthreshold=2000) {
     /* read in all files in the input folder */
     vector<string> files;
     GetFiles(input, files);
@@ -101,26 +101,26 @@ int UPCdijets(char const* input="/eos/user/g/ginnocen/CMSRun3/ZeroBias_HIRun2018
     int nbins = 20;
     float min = 0;
     float max = 40;
-
+    std::cout<<"TEST1"<<std::endl;
     TH1F emuHist("emuHist", "", nbins, min, max);
     TH1F emuMatchedHist("emuMatchedHist", "", nbins, min, max);
     TH1F recoHist("recoHist", "", nbins, min, max);
 
     Long64_t totalEvents = emuReader.GetEntries(true);
-
+    std::cout<<totalEvents<<std::endl;
     int counter_ZDCOrselected = 0;
     int counter_ZDCOrJetselected = 0;
     /* read in information from TTrees */
     for (Long64_t i = 0; i < totalEvents; i++) {
         emuReader.Next(); offReader.Next(); offReaderZDC.Next();
-        if (i % 500000 == 0) {
+        if (i % 5 == 0) {
             cout << "Entry: " << i << " / " <<  totalEvents << endl;
         }
 	//FIXME: this is a very preliminary attempt to apply an offline-like selection on the ZDC
 	//signal. Later on we will use it to mimic the effect of a ZDCOr L1 selection
-	bool isofflinesignal=((*sumPlus)>ZDC_1nthreshold&&(*sumMinus)<ZDC_1nthreshold)||((*sumPlus)<ZDC_1nthreshold&&(*sumMinus)>ZDC_1nthreshold);
-        if (doZDCOr && !isofflinesignal) continue;
-        counter_ZDCOrselected++;
+	//bool isofflinesignal=((*sumPlus)>ZDC_1nthreshold&&(*sumMinus)<ZDC_1nthreshold)||((*sumPlus)<ZDC_1nthreshold&&(*sumMinus)>ZDC_1nthreshold);
+        //if (doZDCOr && !isofflinesignal) continue;
+        //counter_ZDCOrselected++;
 
 	float maxJetPt = -999;
         float maxJetPhi = -999;
@@ -129,7 +129,7 @@ int UPCdijets(char const* input="/eos/user/g/ginnocen/CMSRun3/ZeroBias_HIRun2018
         float emuMaxJetPt = -999;
         float emuMatchedJetPt = -999;
         float minDR = 10;
-        //std::cout<<"N jets="<< *jetN<<std::endl;
+        std::cout<<"N jets="<< *jetN<<std::endl;
         /* iterate through jets and find the jet with max pT */
         for (int i = 0; i < *jetN; ++i) {
             if (TMath::Abs(jetEta[i]) > 2) { continue; }
