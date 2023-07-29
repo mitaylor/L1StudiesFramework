@@ -64,7 +64,9 @@ void FillChain(TChain& chain, vector<string>& files) {
     }
 }
 
-int UPCdijets(char const* input="data/",
+//int UPCdijets(char const* input= "/afs/cern.ch/work/g/ginnocen/CMSwork/myMCsamplesRun3L1forest/",
+//int UPCdijets(char const* input= "/eos/user/g/ginnocen/CMSRun3/ZeroBias_HIRun2018A_MiniAOD_Run326776_131X_HF_14_19_v1/230701_025938/0000/",
+int UPCdijets(char const* input= "data/",
 	      bool doZDCOr=false, float ZDC_1nthreshold=2000) {
     /* read in all files in the input folder */
     vector<string> files;
