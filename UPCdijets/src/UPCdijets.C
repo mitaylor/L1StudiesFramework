@@ -64,19 +64,20 @@ void FillChain(TChain& chain, vector<string>& files) {
     }
 }
 
-int UPCdijets(char const* input="L1NtupleUPCtest.root",
+int UPCdijets(char const* input="data/",
 	      bool doZDCOr=false, float ZDC_1nthreshold=2000) {
     /* read in all files in the input folder */
     vector<string> files;
     GetFiles(input, files);
- 
+
     /* read in offline ZDC information */
+   /*
     TChain offChainZDC("zdcanalyzer/zdcrechit");
     FillChain(offChainZDC, files);
     TTreeReader offReaderZDC(&offChainZDC);
     TTreeReaderValue<float> sumPlus(offReaderZDC, "sumPlus");
     TTreeReaderValue<float> sumMinus(offReaderZDC, "sumMinus");
-
+    */
     /* read in calo jet information */
     TChain offChain("akCs4PFJetAnalyzer/t");
     FillChain(offChain, files);
@@ -98,22 +99,21 @@ int UPCdijets(char const* input="L1NtupleUPCtest.root",
     float threshold = 8;
 
     /* create histograms for efficiency plots */
-    int nbins = 20;
+    int nbins = 40;
     float min = 0;
     float max = 40;
-    std::cout<<"TEST1"<<std::endl;
     TH1F emuHist("emuHist", "", nbins, min, max);
     TH1F emuMatchedHist("emuMatchedHist", "", nbins, min, max);
     TH1F recoHist("recoHist", "", nbins, min, max);
 
     Long64_t totalEvents = emuReader.GetEntries(true);
-    std::cout<<totalEvents<<std::endl;
     int counter_ZDCOrselected = 0;
     int counter_ZDCOrJetselected = 0;
     /* read in information from TTrees */
+    int totnjets = 0;
     for (Long64_t i = 0; i < totalEvents; i++) {
-        emuReader.Next(); offReader.Next(); offReaderZDC.Next();
-        if (i % 5 == 0) {
+        emuReader.Next(); offReader.Next(); //offReaderZDC.Next();
+        if (i % 100 == 0) {
             cout << "Entry: " << i << " / " <<  totalEvents << endl;
         }
 	//FIXME: this is a very preliminary attempt to apply an offline-like selection on the ZDC
@@ -129,10 +129,11 @@ int UPCdijets(char const* input="L1NtupleUPCtest.root",
         float emuMaxJetPt = -999;
         float emuMatchedJetPt = -999;
         float minDR = 10;
-        std::cout<<"N jets="<< *jetN<<std::endl;
         /* iterate through jets and find the jet with max pT */
-        for (int i = 0; i < *jetN; ++i) {
-            if (TMath::Abs(jetEta[i]) > 2) { continue; }
+	//std::cout<<"N jets= "<<*jetN<<std::endl;
+	totnjets = totnjets + *jetN;
+	for (int i = 0; i < *jetN; ++i) {
+            if (TMath::Abs(jetEta[i]) > 9) { continue; }
 
             if (jetPt[i] > maxJetPt) {
                 maxJetPt = jetPt[i];
@@ -208,8 +209,9 @@ int UPCdijets(char const* input="L1NtupleUPCtest.root",
     recoHist.Write();
 
     fout->Close();
+    std::cout<<"N total jets= "<<totnjets<<std::endl;
     std::cout<<"ZDCOrselected fraction ="<<(float)counter_ZDCOrselected/(float)totalEvents<<std::endl;
-    std::cout<<"ZDCOrJetselected, threshold="<<threshold<<" is ="<<(float)counter_ZDCOrJetselected/(float)totalEvents<<std::endl; 
+    std::cout<<"ZDCOrJetselected, threshold="<<threshold<<" is ="<<(float)counter_ZDCOrJetselected/(float)totalEvents<<std::endl;
     return 1;
 }
 
