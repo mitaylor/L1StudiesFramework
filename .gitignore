@@ -2,6 +2,5 @@
 *.txt
 *.DS_Store
 *.root
-*.xml
 RunDataReco/**
 ReadL1Ntuples/bin/**

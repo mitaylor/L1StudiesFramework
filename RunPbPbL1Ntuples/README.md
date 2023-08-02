@@ -29,12 +29,12 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2023_v0_0_2.xml
+wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsHeavyIons2023_v0_0_3.xml
 cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2023_v0_0_2.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsHeavyIons2023_v0_0_3.xml')
 
 ### 3. Run cmsDriver.py script
 
@@ -45,7 +45,7 @@ For the following instructions please alter the paths to reflect your own setup.
 ```
 cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_2018Data.sh CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
-./runCmsDriver_2018Data.py
+./runCmsDriver_2018Data.sh
 ```
 
 **For processing Run 3 MC:**
@@ -53,7 +53,7 @@ cd CMSSW_13_1_0_pre4/src
 ```
 cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
-./runCmsDriver_Run3MC.py
+./runCmsDriver_Run3MC.sh
 ```
 
 **For processing 2022 data:**
@@ -61,8 +61,8 @@ cd CMSSW_13_1_0_pre4/src
 ```
 cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_2022Data_*.sh CMSSW_13_1_0_pre4/src
 cd CMSSW_13_1_0_pre4/src
-./runCmsDriver_2022Data_MB.py
-./runCmsDriver_2022Data_ZB.py
+./runCmsDriver_2022Data_MB.sh
+./runCmsDriver_2022Data_ZB.sh
 ```
 
 ### 4. Add the Spike Killer settings
