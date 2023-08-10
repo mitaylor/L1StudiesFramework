@@ -9,7 +9,7 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --repacked --python_filename=${confi
     -n 1000 --no_output --era=${era} --data --conditions=${globaltag} \
     --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
-    --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2023_v0_4 \
+    --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2023_v0_3 \
     --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML \
     --filein=${filein}
 
