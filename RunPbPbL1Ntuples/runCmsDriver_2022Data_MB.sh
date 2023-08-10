@@ -17,7 +17,7 @@ echo '
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
     digiLabel = cms.untracked.InputTag("hcalDigis"),
     minimized = cms.untracked.bool(True),
-    fillhf = cms.bool(True)
+    fillhf = cms.bool(False)
 )
 
 process.HFAdc = cms.Path(process.HFAdcana)
