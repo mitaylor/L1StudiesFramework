@@ -29,12 +29,12 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsPPRef2023_v0_0_4.xml
+wget wget https://raw.githubusercontent.com/mitaylor/HIMenus/main/Menus/L1Menu_CollisionsPPRef2023_v0_0_2.xml
 cd ../../../../../
 scram b -j 8
 ```
 
-Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsPPRef2023_v0_0_4.xml')
+Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile: process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml') → process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_CollisionsPPRef2023_v0_0_2.xml')
 
 ### 3. Do a local test of cmsRun
 
