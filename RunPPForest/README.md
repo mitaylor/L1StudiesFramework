@@ -45,7 +45,7 @@ For the following instructions please alter the paths to reflect your own setup.
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunPPL1Ntuples/forestL1_PP_Run3MC.py CMSSW_13_2_0_pre3/src
+cp L1StudiesFramework/RunPPForest/forestL1_PP_Run3MC.py CMSSW_13_2_0_pre3/src
 cd CMSSW_13_2_0_pre3/src
 cmsRun forestL1_PP_Run3MC.py
 ```
@@ -57,7 +57,7 @@ Edit crabConfig_forestL1_PP_Run3MC.py to input your storage area, storage site, 
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunPPL1Ntuples/crabConfig_forestL1_PP_Run3MC.py CMSSW_13_2_0_pre3/src
+cp L1StudiesFramework/RunPPForest/crabConfig_forestL1_PP_Run3MC.py CMSSW_13_2_0_pre3/src
 cd CMSSW_13_2_0_pre3/src
 crab submit -c crabConfig_forestL1_PP_Run3MC.py
 ```

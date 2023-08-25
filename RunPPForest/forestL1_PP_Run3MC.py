@@ -134,7 +134,7 @@ process.HiGenParticleAna.etaMax = cms.untracked.double(5.) # default is 2.5
 # Event Analysis
 #########################
 
-# use data version to avoid PbPb MC
+# Use data version to avoid PbPb MC
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.hiEvtAnalyzer.Vertex = cms.InputTag("offlineSlimmedPrimaryVertices")
 process.hiEvtAnalyzer.doCentrality = cms.bool(False)
@@ -233,11 +233,9 @@ associatePatAlgosToolsTask(process)
 #####################################################################################
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
-# from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP
 from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAW
 
 # Call to customisation function L1TReEmulMCFromRAW imported from L1Trigger.Configuration.customiseReEmul
-# process = L1TReEmulMCFromRAWSimHcalTP(process)
 process = L1TReEmulMCFromRAW(process)
 
 # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple
