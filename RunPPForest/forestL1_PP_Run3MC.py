@@ -264,3 +264,12 @@ process = L1TGlobalMenuXML(process)
 from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
 process = customiseEarlyDelete(process)
 # End adding early deletion
+
+process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
+    digiLabel = cms.untracked.InputTag("hcalDigis"),
+    minimized = cms.untracked.bool(True),
+    fillhf = cms.bool(False)
+)
+
+process.HFAdc = cms.Path(process.HFAdcana)
+process.schedule.append(process.HFAdc)
