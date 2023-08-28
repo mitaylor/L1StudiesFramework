@@ -12,3 +12,15 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --python_filename=${config}.py \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
     --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2023_v0_3 \
     --filein=${filein} --secondfilein=${secondfilein}
+
+echo '
+
+process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
+    digiLabel = cms.untracked.InputTag("hcalDigis"),
+    minimized = cms.untracked.bool(True),
+    fillhf = cms.bool(False)
+)
+
+process.HFAdc = cms.Path(process.HFAdcana)
+process.schedule.append(process.HFAdc)
+' >> ${config}.py
