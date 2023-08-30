@@ -2,5 +2,7 @@
 *.txt
 *.DS_Store
 *.root
-RunDataReco/**
 ReadL1Ntuples/bin/**
+JetEfficiency/bin/**
+JetEfficiency/Notes.md
+ReadL1Ntuples/data/**
