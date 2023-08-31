@@ -48,9 +48,17 @@ cd CMSSW_9_4_10/src
 cmsRun forestL1_PP_2017Data.py
 ```
 
+**For processing 2017 MC:**
+
+```
+cp L1StudiesFramework/RunPPForest2017/forestL1_PP_2017MC.py CMSSW_9_4_10/src
+cd CMSSW_9_4_10/src
+cmsRun forestL1_PP_2017MC.py
+```
+
 ### 4. Submit CRAB jobs
 
-Edit crabConfig_forestL1_PP_2017Data.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+Edit crabConfig_forestL1_PP_2017Data.py or crabConfig_forestL1_PP_2017MC.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
 **For processing 2017 data:**
 
@@ -59,3 +67,12 @@ cp L1StudiesFramework/RunPPForest/crabConfig_forestL1_PP_2017Data.py CMSSW_9_4_1
 cd CMSSW_9_4_10/src
 crab submit -c crabConfig_forestL1_PP_2017Data.py
 ```
+
+**For processing 2017 MC:**
+
+```
+cp L1StudiesFramework/RunPPForest/crabConfig_forestL1_PP_2017MC.py CMSSW_9_4_10/src
+cd CMSSW_9_4_10/src
+crab submit -c crabConfig_forestL1_PP_2017MC.py
+```
+
