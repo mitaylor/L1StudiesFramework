@@ -26,7 +26,6 @@ config.Data.unitsPerJob = 1
 config.Data.publication = False
 config.Data.outLFNDirBase = OutputBase
 config.Data.outputDatasetTag = Tag
-config.Data.useParent = True # uses the parent RAW dataset as secondary source
 config.Data.allowNonValidInputDataset = True
 
 #### Site ####

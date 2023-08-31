@@ -6,3 +6,4 @@ ReadL1Ntuples/bin/**
 JetEfficiency/bin/**
 JetEfficiency/Notes.md
 ReadL1Ntuples/data/**
+RateEstimation/GatherFiles.C

@@ -82,8 +82,9 @@ process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(False)
 )
 
+# Update ASAP with new tag, this one has muon bug
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2023_realistic', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '132X_mcRun3_2023_realistic_v2', '')
 process.HiForestInfo.GlobalTagLabel = process.GlobalTag.globaltag
 
 # Old calibration here, might need to update
