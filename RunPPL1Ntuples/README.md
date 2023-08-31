@@ -1,6 +1,6 @@
 ## Instructions to run the L1Emulator with the Run 3 PP reference menu using CMSSW_13_2_0_pre3
 
-These instructions are for running the L1Ntuples with the offline information included. They can be used to run on 2023 MC.
+These instructions are for creating only the L1Ntuples without the offline information included. They can be used to run on 2023 MC.
 
 These configs do not enable resimulating HCal TPs, which means that the Minimum Bias trigger thresholds will not be altered from when the data was taken or the MC was generated. If you would like to change the MB thresholds, contact me and I will tell you which lines to alter in the cmsRun configs.
 
