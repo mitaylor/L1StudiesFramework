@@ -1,12 +1,12 @@
 #!/bin/bash
 
-globaltag=130X_dataRun3_Prompt_v3 # latest GT from https://twiki.cern.ch/twiki/bin/view/CMS/LatestOnlineGTs
-era=Run3_pp_on_PbPb # for Run 2
+globaltag=125X_dataRun3_relval_v4
+era=Run3_pp_on_PbPb
 filein='/store/hidata/HIRun2022A/HITestRaw1/RAW/v1/000/362/219/00000/fabf58d4-c2e8-4275-a868-fbc8eb3436b1.root'
-config=l1Ntuple_2022Data_ZB; # cmsRun config file name
+config=l1Ntuple_PbPb_2022Data_ZB
 
 cmsDriver.py l1Ntuple -s RAW2DIGI --no_exec --repacked --python_filename=${config}.py \
-    -n 1000 --no_output --era=${era} --data --conditions=${globaltag} \
+    -n 100 --no_output --era=${era} --data --conditions=${globaltag} \
     --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW \
     --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
     --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParamsHI_2023_v0_3 \

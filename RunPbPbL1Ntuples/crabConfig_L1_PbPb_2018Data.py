@@ -1,5 +1,5 @@
-OutputBase = "" # your storage area
-Tag="" # your job name
+OutputBase = '' # your storage area
+Tag = '' # your job name
 
 from WMCore.Configuration import Configuration
 config = Configuration()
@@ -13,7 +13,7 @@ config.General.transferLogs = True
 #### JobType ####
 config.section_('JobType')
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = 'l1Ntuple_2018Data.py'
+config.JobType.psetName = 'l1Ntuple_PbPb_2018Data.py'
 config.JobType.maxMemoryMB = 2000
 config.JobType.allowUndistributedCMSSW = True
 

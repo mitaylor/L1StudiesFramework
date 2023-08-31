@@ -1,39 +1,43 @@
 ### HiForest Configuration
-# Input: miniAOD
+# Collisions: PbPb
 # Type: data
+# Input: miniAOD
 
 import FWCore.ParameterSet.Config as cms
 from Configuration.Eras.Era_Run3_pp_on_PbPb_cff import Run3_pp_on_PbPb
-process = cms.Process('HiForest',Run3_pp_on_PbPb)
+process = cms.Process('HiForest', Run3_pp_on_PbPb)
 
-###############################################################################
+#####################################################################################
+# HiForest labeling info
+#####################################################################################
 
-# HiForest info
 process.load("HeavyIonsAnalysis.EventAnalysis.HiForestInfo_cfi")
-process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 131X, data")
+process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 132X, data")
 
-###############################################################################
+#####################################################################################
+# Input source
+#####################################################################################
 
-# Input files
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
     fileNames = cms.untracked.vstring(
         '/store/hidata/HIRun2022A/HITestRaw0/AOD/PromptReco-v1/000/362/293/00000/397cc4f3-4eb7-41b9-b2d1-baa004c7f61a.root'
-    ), 
+    ),
     secondaryFileNames = cms.untracked.vstring(
         '/store/hidata/HIRun2022A/HITestRaw0/RAW/v1/000/362/293/00000/3b4858f8-deea-4ffa-8d53-3e2db6f57f9f.root',
         '/store/hidata/HIRun2022A/HITestRaw0/RAW/v1/000/362/293/00000/ac6f9fea-ed6c-41ee-befc-ec218276da8e.root'
-        )
+    )
 )
 
-# Number of events to process, set to -1 to process all events
+# Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1000)
-    )
+    input = cms.untracked.int32(100)
+)
 
-###############################################################################
-
+#####################################################################################
 # Load Global Tag, geometry, etc.
+#####################################################################################
+
 # process.load('Configuration.Geometry.GeometryDB_cff')
 process.load('Configuration.StandardSequences.GeometryDB_cff')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
@@ -83,17 +87,15 @@ process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(False)
 )
 
-###############################################################################
-
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '130X_dataRun3_Prompt_v3', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '125X_dataRun3_relval_v4', '')
 process.HiForestInfo.GlobalTagLabel = process.GlobalTag.globaltag
 
 # Set spike killer settings for emulation
 process.GlobalTag.toGet.extend = cms.VPSet(
    cms.PSet(record = cms.string('EcalTPGFineGrainStripEERcd'),
-            tag = cms.string('EcalTPGFineGrainStrip_7'),
-            connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+        tag = cms.string('EcalTPGFineGrainStrip_7'),
+        connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
     ),
     cms.PSet(record = cms.string('EcalTPGSpikeRcd'),
         tag = cms.string('EcalTPGSpike_12'),
@@ -101,9 +103,14 @@ process.GlobalTag.toGet.extend = cms.VPSet(
     )
 )
 
-###############################################################################
+#####################################################################################
+# Define tree output
+#####################################################################################
 
-# PAT stuff
+#########################
+# Event analysis
+#########################
+
 # process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.skimanalysis_cfi')
@@ -114,15 +121,31 @@ process.load('HeavyIonsAnalysis.EventAnalysis.skimanalysis_cfi')
 # process.hltobject.triggerNames = trigger_list_mc
 
 process.load('HeavyIonsAnalysis.EventAnalysis.particleFlowAnalyser_cfi')
+
+#########################
+# Photons and electrons
+#########################
+
 process.load('HeavyIonsAnalysis.EGMAnalysis.ggHiNtuplizer_cfi')
 process.ggHiNtuplizer.doMuons = cms.bool(False)
 process.load("TrackingTools.TransientTrack.TransientTrackBuilder_cfi")
+
+#########################
+# Jets
+#########################
+
 process.load('HeavyIonsAnalysis.JetAnalysis.akCs4PFJetSequence_pponPbPb_data_cff')
+
+#########################
+# Tracks
+#########################
+
 process.load("HeavyIonsAnalysis.TrackAnalysis.TrackAnalyzers_cff")
 
-###############################################################################
+#########################
+# Main analysis list
+#########################
 
-# Main forest sequence
 process.forest = cms.Path(
     process.HiForestInfo + 
     # process.hltanalysis +
@@ -131,7 +154,7 @@ process.forest = cms.Path(
     process.hiEvtAnalyzer +
     process.ggHiNtuplizer +
     process.akCs4PFJetAnalyzer
-    )
+)
 
 # Automatic addition of the customisation function from PhysicsTools.PatAlgos.slimming.miniAOD_tools
 from PhysicsTools.PatAlgos.slimming.miniAOD_tools import miniAOD_customizeAllData 
@@ -143,7 +166,9 @@ process = miniAOD_customizeAllData(process)
 process.TFileService = cms.Service("TFileService",
     fileName = cms.string("HiForestMiniAOD.root"))
 
-###############################################################################
+#########################
+# Event selection
+#########################
 
 # Selection of at least a two-track fitted vertex                                                                                                                                                                     
 process.primaryVertexFilterHI = cms.EDFilter("VertexSelector",
@@ -157,8 +182,6 @@ process.load("HeavyIonsAnalysis.EventAnalysis.clusterCompatibilityFilter_cfi")
 process.pclusterCompatibilityFilter = cms.Path(process.clusterCompatibilityFilter)
 process.pprimaryVertexFilterHI = cms.Path(process.primaryVertexFilterHI)
 process.pAna = cms.EndPath(process.skimanalysis)
-
-###############################################################################
 
 process.raw2digi_step = cms.Path(process.RawToDigi)
 process.recotowers = cms.Path(
@@ -175,9 +198,10 @@ process.schedule.associate(process.patTask)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
-###############################################################################
+#####################################################################################
+# L1 emulation
+#####################################################################################
 
-# Emulation
 from Configuration.Applications.ConfigBuilder import MassReplaceInputTag
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
@@ -206,9 +230,10 @@ from L1Trigger.Configuration.customiseUtils import L1TGlobalMenuXML
 # Call to customisation function L1TGlobalMenuXML imported from L1Trigger.Configuration.customiseUtils
 process = L1TGlobalMenuXML(process)
 
-###############################################################################
+#########################
+# Customization
+#########################
 
-# Addictional customization
 # process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
@@ -224,12 +249,12 @@ process.schedule.append(process.HFAdc)
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
 process.hltfilter = hltHighLevel.clone(
     HLTPaths = [
-        # "HLT_HIZeroBias_v*",                                                                                                                                                                                  
-        "HLT_HIMinimumBias_v*",
+        "HLT_HIZeroBias_v*",                                                                                                                                                                                  
+        #"HLT_HIMinimumBias_v*",
     ]
 )
 process.filterSequence = cms.Sequence(
-    process.hltfilter*process.primaryVertexFilter*process.clusterCompatibilityFilter
+    process.hltfilter
 )
 
 process.superFilterPath = cms.Path(process.filterSequence)

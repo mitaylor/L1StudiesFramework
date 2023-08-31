@@ -14,7 +14,7 @@ config.General.transferLogs = True
 #### JobType ####
 config.section_('JobType')
 config.JobType.pluginName = 'Analysis'
-config.JobType.psetName = 'forestL1_miniAOD_2022Data_MB.py' # or use 'forestL1_miniAOD_2022Data_ZB.py'
+config.JobType.psetName = 'forestL1_PbPb_2022Data_MB.py' # or use 'forestL1_miniAOD_2022Data_ZB.py'
 config.JobType.maxMemoryMB = 2000
 config.JobType.allowUndistributedCMSSW = True
 

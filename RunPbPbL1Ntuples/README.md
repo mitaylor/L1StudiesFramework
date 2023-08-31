@@ -1,4 +1,4 @@
-## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_13_1_0_pre4
+## Instructions to run the L1Emulator with the Run 3 HI menu using CMSSW_13_2_0_pre3
 
 These instructions are for creating only the L1Ntuples without the offline information included.
 
@@ -7,13 +7,13 @@ These configs do not enable resimulating HCal TPs, which means that the Minimum 
 ### 1. Set up the emulator
 
 ```
-cmsrel CMSSW_13_1_0_pre4
-cd CMSSW_13_1_0_pre4/src
+cmsrel CMSSW_13_2_0_pre3
+cd CMSSW_13_2_0_pre3/src
 cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_13_1_0_pre4
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v161
+git fetch cms-l1t-offline l1t-integration-CMSSW_13_2_0_pre3
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v164-CMSSW_13_2_0_pre3
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 svn export https://github.com/boundino/HltL1Run2021.git/trunk/L1/ADC
 
@@ -43,26 +43,26 @@ For the following instructions please alter the paths to reflect your own setup.
 **For processing 2018 data:**
 
 ```
-cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_2018Data.sh CMSSW_13_1_0_pre4/src
-cd CMSSW_13_1_0_pre4/src
-./runCmsDriver_2018Data.sh
+cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_PbPb_2018Data.sh CMSSW_13_2_0_pre3/src
+cd CMSSW_13_2_0_pre3/src
+./runCmsDriver_PbPb_2018Data.sh
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_Run3MC.sh CMSSW_13_1_0_pre4/src
-cd CMSSW_13_1_0_pre4/src
-./runCmsDriver_Run3MC.sh
+cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_PbPb_Run3MC.sh CMSSW_13_2_0_pre3/src
+cd CMSSW_13_2_0_pre3/src
+./runCmsDriver_PbPb_Run3MC.sh
 ```
 
 **For processing 2022 data:**
 
 ```
-cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_2022Data_*.sh CMSSW_13_1_0_pre4/src
-cd CMSSW_13_1_0_pre4/src
-./runCmsDriver_2022Data_MB.sh
-./runCmsDriver_2022Data_ZB.sh
+cp L1StudiesFramework/RunPbPbL1Ntuples/runCmsDriver_PbPb_2022Data_*.sh CMSSW_13_2_0_pre3/src
+cd CMSSW_13_2_0_pre3/src
+./runCmsDriver_PbPb_2022Data_MB.sh
+./runCmsDriver_PbPb_2022Data_ZB.sh
 ```
 
 ### 4. Add the Spike Killer settings
@@ -73,11 +73,11 @@ If you want to apply the HI spike killer settings, add the following lines to th
 process.GlobalTag.toGet.extend = cms.VPSet(
    cms.PSet(record = cms.string('EcalTPGFineGrainStripEERcd'),
             tag = cms.string('EcalTPGFineGrainStrip_7'),
-            connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+            connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
     ),
     cms.PSet(record = cms.string('EcalTPGSpikeRcd'),
         tag = cms.string('EcalTPGSpike_12'),
-        connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+        connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
     )
 )
 ```
@@ -87,47 +87,47 @@ process.GlobalTag.toGet.extend = cms.VPSet(
 **For processing 2018 data:**
 
 ```
-cmsRun l1Ntuple_2018Data.py
+cmsRun l1Ntuple_PbPb_2018Data.py
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cmsRun l1Ntuple_Run3MC.py
+cmsRun l1Ntuple_PbPb_Run3MC.py
 ```
 
 **For processing 2022 data:**
 
 ```
-cmsRun l1Ntuple_2022Data_MB.py
-cmsRun l1Ntuple_2022Data_ZB.py
+cmsRun l1Ntuple_PbPb_2022Data_MB.py
+cmsRun l1Ntuple_PbPb_2022Data_ZB.py
 ```
 
 ### 6. Submit CRAB jobs
 
-Edit crabConfig_2018Data_L1.py, crabConfig_Run3MC_L1.py, or crabConfig_2022Data_L1.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
+Edit crabConfig_L1_PbPb_2018Data.py, crabConfig_Run3MC_L1.py, or crabConfig_L1_PbPb_2022Data.py to input your storage area, storage site, dataset, and job name. Then for the following instructions please alter the paths to reflect your own setup.
 
 **For processing 2018 data:**
 
 ```
-cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_2018Data.py CMSSW_13_1_0_pre4/src
-cd CMSSW_13_1_0_pre4/src
-crab submit -c crabConfig_2018Data_L1.py
+cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_L1_PbPb_2018Data.py CMSSW_13_2_0_pre3/src
+cd CMSSW_13_2_0_pre3/src
+crab submit -c crabConfig_L1_PbPb_2018Data.py
 ```
 
 **For processing Run 3 MC:**
 
 ```
-cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_Run3MC.py CMSSW_13_1_0_pre4/src
-cd CMSSW_13_1_0_pre4/src
-crab submit -c crabConfig_Run3MC_L1.py
+cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_L1_PbPb_Run3MC.py CMSSW_13_2_0_pre3/src
+cd CMSSW_13_2_0_pre3/src
+crab submit -c crabConfig_L1_PbPb_Run3MC.py
 ```
 
 **For processing 2022 data:**
 
 ```
-cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_2022Data.py CMSSW_13_1_0_pre4/src
-cd CMSSW_13_1_0_pre4/src
-crab submit -c crabConfig_2022Data_L1.py
+cp L1StudiesFramework/RunPbPbL1Ntuples/crabConfig_L1_PbPb_2022Data.py CMSSW_13_2_0_pre3/src
+cd CMSSW_13_2_0_pre3/src
+crab submit -c crabConfig_L1_PbPb_2022Data.py
 ```
 

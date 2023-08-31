@@ -1,41 +1,45 @@
 ### HiForest Configuration
-# Input: miniAOD
+# Collisions: PbPb
 # Type: data
+# Input: miniAOD
 
 import FWCore.ParameterSet.Config as cms
 from Configuration.Eras.Era_Run2_2018_pp_on_AA_cff import Run2_2018_pp_on_AA
 from Configuration.ProcessModifiers.run2_miniAOD_pp_on_AA_103X_cff import run2_miniAOD_pp_on_AA_103X
 process = cms.Process('HiForest', Run2_2018_pp_on_AA,run2_miniAOD_pp_on_AA_103X)
 
-###############################################################################
+#####################################################################################
+# HiForest labeling info
+#####################################################################################
 
-# HiForest info
 process.load("HeavyIonsAnalysis.EventAnalysis.HiForestInfo_cfi")
-process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 131X, data")
+process.HiForestInfo.info = cms.vstring("HiForest, miniAOD, 132X, data")
 
-###############################################################################
+#####################################################################################
+# Input source
+#####################################################################################
 
-# input files
 process.source = cms.Source("PoolSource",
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
     fileNames = cms.untracked.vstring(
         'file:/eos/cms/store/group/phys_heavyions/mitaylor/L1EmulatorTestFiles/ZeroBiasMiniAOD.root'
-        ),
+    ),
     secondaryFileNames = cms.untracked.vstring(
         '/store/user/shuaiy/RiceHIN/L1Emulator/SkimedZeroBias_HIRun2018A_v1_RAW_run326776/HIForward/SkimedZeroBias_HIRun2018A_v1_RAW_run326776/201228_010151/0000/skimedZeroBias_1.root'
-        )
     )
+)
 
-# number of events to process, set to -1 to process all events
+# Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(100)
-    )
+)
 
-###############################################################################
+#####################################################################################
+# Load Global Tag, geometry, etc.
+#####################################################################################
 
-# load Global Tag, geometry, etc.
-process.load('Configuration.Geometry.GeometryDB_cff')
 process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.Geometry.GeometryDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load('FWCore.MessageService.MessageLogger_cfi')
@@ -50,7 +54,7 @@ process.options = cms.untracked.PSet(
     FailPath = cms.untracked.vstring(),
     IgnoreCompletely = cms.untracked.vstring(),
     Rethrow = cms.untracked.vstring(),
-    SkipEvent = cms.untracked.vstring(),
+    SkipEvent = cms.untracked.vstring('ProductNotFound'),
     accelerators = cms.untracked.vstring('*'),
     allowUnscheduled = cms.obsolete.untracked.bool,
     canDeleteEarly = cms.untracked.vstring(),
@@ -87,28 +91,31 @@ print('\n')
 print('\033[31m~*~ CENTRALITY TABLE FOR 2018 PBPB DATA ~*~\033[0m')
 print('\033[36m~*~ TAG: ' + centralityTag + ' ~*~\033[0m')
 print('\n')
+
 process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+
 process.GlobalTag.toGet.extend([
     cms.PSet(
         record = cms.string("HeavyIonRcd"),
         tag = cms.string(centralityTag),
         label = cms.untracked.string("HFtowers"),
         connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-        ),
-    ])
+    )
+])
 
 process.GlobalTag.toGet.extend([
     cms.PSet(
         record = cms.string("BTagTrackProbability3DRcd"),
         tag = cms.string("JPcalib_Data103X_2018PbPb_v1"),
         connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-        )
-    ])
+    )
+])
 
+# Set spike killer settings for emulation
 process.GlobalTag.toGet.extend = cms.VPSet(
    cms.PSet(record = cms.string('EcalTPGFineGrainStripEERcd'),
-            tag = cms.string('EcalTPGFineGrainStrip_7'),
-            connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+        tag = cms.string('EcalTPGFineGrainStrip_7'),
+        connect =cms.string('frontier://FrontierProd/CMS_CONDITIONS')
     ),
     cms.PSet(record = cms.string('EcalTPGSpikeRcd'),
         tag = cms.string('EcalTPGSpike_12'),
@@ -116,7 +123,9 @@ process.GlobalTag.toGet.extend = cms.VPSet(
     )
 )
 
-###############################################################################
+#####################################################################################
+# Define tree output
+#####################################################################################
 
 # root output
 # process.TFileService = cms.Service("TFileService",
@@ -133,9 +142,10 @@ process.GlobalTag.toGet.extend = cms.VPSet(
 
 # process.output_path = cms.EndPath(process.output)
 
-###############################################################################
+#########################
+# Event analysis
+#########################
 
-# event analysis
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.skimanalysis_cfi')
@@ -146,8 +156,11 @@ from HeavyIonsAnalysis.EventAnalysis.hltobject_cfi import trigger_list_data
 process.hltobject.triggerNames = trigger_list_data
 
 process.load('HeavyIonsAnalysis.EventAnalysis.particleFlowAnalyser_cfi')
-################################
-# electrons, photons, muons
+
+#########################
+# Photons, electrons, and muons
+#########################
+
 SSHIRun2018A = "HeavyIonsAnalysis/EGMAnalysis/data/SSHIRun2018A.dat"
 process.load('HeavyIonsAnalysis.EGMAnalysis.correctedElectronProducer_cfi')
 process.correctedElectrons.correctionFile = SSHIRun2018A
@@ -158,15 +171,23 @@ process.load('HeavyIonsAnalysis.EGMAnalysis.ggHiNtuplizer_cfi')
 process.ggHiNtuplizer.doMuons = cms.bool(False)
 process.ggHiNtuplizer.electronSrc = "correctedElectrons"
 process.load("TrackingTools.TransientTrack.TransientTrackBuilder_cfi")
-################################
-# jet reco sequence
-process.load('HeavyIonsAnalysis.JetAnalysis.akCs4PFJetSequence_pponPbPb_data_cff')
-################################
-# tracks
-process.load("HeavyIonsAnalysis.TrackAnalysis.TrackAnalyzers_cff")
-###############################################################################
 
-# ZDC RecHit Producer
+#########################
+# Jets
+#########################
+
+process.load('HeavyIonsAnalysis.JetAnalysis.akCs4PFJetSequence_pponPbPb_data_cff')
+
+#########################
+# Tracks
+#########################
+
+process.load("HeavyIonsAnalysis.TrackAnalysis.TrackAnalyzers_cff")
+
+#########################
+# ZDC
+#########################
+
 process.load('HeavyIonsAnalysis.ZDCAnalysis.QWZDC2018Producer_cfi')
 process.load('HeavyIonsAnalysis.ZDCAnalysis.QWZDC2018RecHit_cfi')
 
@@ -175,11 +196,11 @@ process.zdcanalyzer.doZDCRecHit = True
 process.zdcanalyzer.doZDCDigi = False
 process.zdcanalyzer.zdcRecHitSrc = cms.InputTag("QWzdcreco")
 process.zdcanalyzer.calZDCDigi = True
-###############################################################################
 
+#########################
+# Main analysis list
+#########################
 
-###############################################################################
-# main forest sequence
 process.forest = cms.Path(
     process.HiForestInfo +
     # process.hltanalysis +
@@ -195,9 +216,11 @@ process.forest = cms.Path(
     process.zdcanalyzer +
     process.unpackedMuons +
     process.muonAnalyzer
-    )
+)
 
-#customisation
+#########################
+# Customization
+#########################
 
 addR3Jets = False
 addR4Jets = True
@@ -224,7 +247,6 @@ if addR3Jets or addR4Jets :
         process.akCs4PFJetAnalyzer.jetName = 'akCs0PF'
         process.forest += process.extraJetsData * process.jetsR4 * process.akCs4PFJetAnalyzer
 
-# this is only for non-reclustered jets
 addCandidateTagging = False
 
 if addCandidateTagging:
@@ -251,9 +273,8 @@ if addCandidateTagging:
 
     process.forest.insert(1,process.candidateBtagging*process.updatedPatJets)
 
-
 #########################
-# Event Selection -> add the needed filters here
+# Event selection
 #########################
 
 process.load('HeavyIonsAnalysis.EventAnalysis.collisionEventSelection_cff')
@@ -263,7 +284,6 @@ process.load('HeavyIonsAnalysis.EventAnalysis.hffilter_cfi')
 process.pphfCoincFilter2Th4 = cms.Path(process.phfCoincFilter2Th4)
 process.pAna = cms.EndPath(process.skimanalysis)
 
-# Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
 process.endjob_step = cms.EndPath(process.endOfProcess)
 
@@ -272,40 +292,41 @@ process.schedule = cms.Schedule(process.forest,process.raw2digi_step,process.end
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
-from Configuration.Applications.ConfigBuilder import MassReplaceInputTag
+#####################################################################################
+# L1 emulation
+#####################################################################################
 
-# customisation of the process.
+from Configuration.Applications.ConfigBuilder import MassReplaceInputTag
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
 # from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP
 from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW
 
-#call to customisation function L1TReEmulFromRAW imported from L1Trigger.Configuration.customiseReEmul
+# Call to customisation function L1TReEmulFromRAW imported from L1Trigger.Configuration.customiseReEmul
 # process = L1TReEmulFromRAWsimHcalTP(process)
 process = L1TReEmulFromRAW(process)
 
 # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple
 from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU 
 
-#call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple
+# Call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple
 process = L1NtupleRAWEMU(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseSettings
 from L1Trigger.Configuration.customiseSettings import L1TSettingsToCaloParams_2018_v1_4_1 
 
-#call to customisation function L1TSettingsToCaloParams_2018_v1_4_1 imported from L1Trigger.Configuration.customiseSettings
+# Call to customisation function L1TSettingsToCaloParams_2018_v1_4_1 imported from L1Trigger.Configuration.customiseSettings
 process = L1TSettingsToCaloParams_2018_v1_4_1(process)
 
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseUtils
 from L1Trigger.Configuration.customiseUtils import L1TGlobalMenuXML 
 
-#call to customisation function L1TGlobalMenuXML imported from L1Trigger.Configuration.customiseUtils
+# Call to customisation function L1TGlobalMenuXML imported from L1Trigger.Configuration.customiseUtils
 process = L1TGlobalMenuXML(process)
 
-# End of customisation functions
-
-
-# Customisation from command line
+#########################
+# Customization
+#########################
 
 # Add early deletion of temporary data products to reduce peak memory need
 from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
@@ -314,6 +335,7 @@ process = customiseEarlyDelete(process)
 
 process.hcalDigis.saveQIE10DataNSamples = cms.untracked.vint32(10) 
 process.hcalDigis.saveQIE10DataTags = cms.untracked.vstring( "MYDATA" )
+
 # process.HcalTPGCoderULUT.FG_HF_thresholds = cms.vuint32(14, 19)
 
 process.HFAdcana = cms.EDAnalyzer("HFAdcToGeV",
