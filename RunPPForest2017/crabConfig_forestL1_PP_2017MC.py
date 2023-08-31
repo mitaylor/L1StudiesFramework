@@ -19,7 +19,7 @@ config.JobType.allowUndistributedCMSSW = True
 
 #### Data ####
 config.section_('Data')
-config.Data.inputDataset = '' # your dataset
+config.Data.inputDataset = '' # your AOD dataset
 config.Data.inputDBS = 'phys03'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
