@@ -1,19 +1,10 @@
 /*
 Input:  L1Ntuple made with one of the following menu versions
-    L1Menu_CollisionsHeavyIons2018_v4_2_0.xml --> Menu::Y2018_V4_2_0
-    L1Menu_CollisionsHeavyIons2022_v0_0_0.xml --> Menu::Y2022_V0_0_0
-    L1Menu_CollisionsHeavyIons2022_v0_0_1.xml --> Menu::Y2022_V0_0_1
-    L1Menu_CollisionsHeavyIons2022_v0_0_2.xml --> Menu::Y2022_V0_0_2
-    L1Menu_CollisionsHeavyIons2022_v0_0_3.xml --> Menu::Y2022_V0_0_3
-    L1Menu_CollisionsHeavyIons2022_v0_0_4.xml --> Menu::Y2022_V0_0_4
-    L1Menu_CollisionsHeavyIons2022_v0_0_5.xml --> Menu::Y2022_V0_0_5
-    L1Menu_CollisionsHeavyIons2022_v1_0_0.xml --> Menu::Y2022_V1_0_0
-    L1Menu_CollisionsHeavyIons2022_v1_0_1.xml --> Menu::Y2022_V1_0_1
-    L1Menu_CollisionsHeavyIons2022_v1_1_0.xml --> Menu::Y2022_V1_1_0
-    L1Menu_CollisionsHeavyIons2023_v0_0_0.xml --> Menu::Y2023_V0_0_0
-    L1Menu_CollisionsHeavyIons2023_v0_0_1.xml --> Menu::Y2023_V0_0_1
-    L1Menu_CollisionsHeavyIons2023_v0_0_2.xml --> Menu::Y2023_V0_0_1
-    L1Menu_CollisionsHeavyIons2023_v0_0_3.xml --> Menu::Y2023_V0_0_1
+    L1Menu_CollisionsHeavyIons2018_v4_2_0.xml --> Menu::Y2018_AA_V4_2_0     Menu for 2018 PbPb Run
+    L1Menu_CollisionsHeavyIons2022_v1_1_0.xml --> Menu::Y2022_AA_V1_1_0     Menu for 2022 PbPb Test Run
+    L1Menu_CollisionsHeavyIons2023_v1_1_3.xml --> Menu::Y2023_AA_V1_1_3     Menu for 2023 PbPb Run, September 26 - ?
+    L1Menu_CollisionsPPRef2023_v1_1_0.xml --> Menu::Y2023_PP_V1_1_0         Menu for 2023 PP Reference Test Run
+    L1Menu_CollisionsPPRef2023_v1_1_2.xml --> Menu::Y2023_PP_V1_1_2         Menu for 2023 PP Reference Run?
 Output: A list of how many times each menu trigger was passed
 Note: If you are using your own custom menu, add it to Menu.h following the instructions in data/README
 */
@@ -33,7 +24,7 @@ using namespace std;
 
 int Print(char const* input) {
     /* initilaize menu */
-    Menu menu(Menu::Y2023_V0_0_3);
+    Menu menu(Menu::Y2023_AA_V1_1_3);
 
     /* file, trees, and branches */
     TFile* inFile = new TFile(input, "read");
