@@ -1,3 +1,7 @@
+**L1OverlapTool** = takes the root output of the L1 rate-estimation tool and makes a plot showing the overlaps between each L1 trigger. Across each row, you see the percentage overlap of every other L1 seed with that row's L1 seed. Works best if you remove any seeds with prescale 0 from the prescale table before running the rate estimation.
+
+**HLTOverlapTool** = calcuates trigger overlaps and PD overlaps for HLT.
+
 **JetEfficiency** = example for how to read in emulated and offline jets and create turn on curves with and without matching to the L1 object.
 
 **RateEstimation** = lists of Ntuples needed for L1 rate estimation studies.
