@@ -13,5 +13,6 @@ do
         seed=$(echo ${seeds[$i]} | sed 's/<\/*name>//g')
         bit=$(echo ${bits[$j]} | sed 's/<\/*index>//g')
         echo "{$bit, \"$seed\"},"
+        # echo "{\"$seed\", $bit},"
     fi
 done

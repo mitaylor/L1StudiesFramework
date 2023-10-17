@@ -2,7 +2,8 @@
 Input:  L1Ntuple made with one of the following menu versions
     L1Menu_CollisionsHeavyIons2018_v4_2_0.xml --> Menu::Y2018_AA_V4_2_0     Menu for 2018 PbPb Run
     L1Menu_CollisionsHeavyIons2022_v1_1_0.xml --> Menu::Y2022_AA_V1_1_0     Menu for 2022 PbPb Test Run
-    L1Menu_CollisionsHeavyIons2023_v1_1_3.xml --> Menu::Y2023_AA_V1_1_3     Menu for 2023 PbPb Run, September 26 - ?
+    L1Menu_CollisionsHeavyIons2023_v1_1_3.xml --> Menu::Y2023_AA_V1_1_3     Menu for 2023 PbPb Run, September 26 - October 11
+    L1Menu_CollisionsHeavyIons2023_v1_1_4.xml --> Menu::Y2023_AA_V1_1_4     Menu for 2023 PbPb Run, October 11 - ?
     L1Menu_CollisionsPPRef2023_v1_1_0.xml --> Menu::Y2023_PP_V1_1_0         Menu for 2023 PP Reference Test Run
     L1Menu_CollisionsPPRef2023_v1_1_2.xml --> Menu::Y2023_PP_V1_1_2         Menu for 2023 PP Reference Run?
 Output: A list of how many times each menu trigger was passed
@@ -24,7 +25,7 @@ using namespace std;
 
 int Print(char const* input) {
     /* initilaize menu */
-    Menu menu(Menu::Y2023_AA_V1_1_3);
+    Menu menu(Menu::Y2023_AA_V1_1_4);
 
     /* file, trees, and branches */
     TFile* inFile = new TFile(input, "read");
